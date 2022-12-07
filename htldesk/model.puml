@@ -1,0 +1,35 @@
+@startuml "Model"
+
+entity User {
+
+    + Id : int
+    + Name : string
+    + Email : string
+    + Password : string
+    + Files : File[3]
+}
+
+entity File {
+    + Id : int
+    + accountingAccounts : accountingAccount[]
+}
+
+entity accountingAccount {
+        + AccountID : int
+        + Entry : Entry[]
+}
+
+entity Entry {
+    + Amount : double
+    + Date : Date
+    + EntryText : string
+    + EntryType : bool
+}
+
+User o--> File 
+
+File o--> accountingAccount 
+
+accountingAccount o--> Entry 
+
+@enduml

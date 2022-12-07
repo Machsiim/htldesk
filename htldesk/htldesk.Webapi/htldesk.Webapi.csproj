@@ -14,4 +14,8 @@
     <ProjectReference Include="..\htldesk.Application\htldesk.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+
 </Project>
