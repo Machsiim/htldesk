@@ -43,5 +43,5 @@ app.UseStaticFiles();
 // Bearbeitet die Routen, für die wir Controller geschrieben haben.
 app.MapControllers();
 // Wichtig für das clientseitige Routing, damit wir direkt an eine URL in der Client App steuern können.
-app.MapFallbackToFile("../htldesk.Client/index.html");
+app.MapFallbackToFile("index.html");
 app.Run();
