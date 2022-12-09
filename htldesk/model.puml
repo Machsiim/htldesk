@@ -20,10 +20,11 @@ entity accountingAccount {
 }
 
 entity Entry {
-    + Amount : double
-    + Date : Date
-    + EntryText : string
-    + EntryType : bool
+    + EntryId : int
+    + GegenKonto : accountingAccount
+    + Haben : decimal
+    + Soll : decimal
+    + Datum : DateTime
 }
 
 User o--> File 

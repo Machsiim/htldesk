@@ -6,7 +6,27 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application
 {
-    internal class Entry
+    public class Entry
     {
+
+        #pragma warning disable CS8618
+        protected Entry() {};
+        #pragma warning restore CS8618
+        
+        public Entry(int id, accountingAccount gegen, decimal haben, decimal soll, DateTime datum)
+        {
+            this.GegenKonto = gegen; 
+            this.Haben = haben;
+            this.Soll = soll; 
+            this.Datum = datum;
+        }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int EntryId { get; private set; }
+        public accountingAccount GegenKonto { get; set; }
+        public decimal Haben { get; set; }
+        public decimal Soll { get; set; }
+        public DateTime Datum { get; set; }
     }
 }
