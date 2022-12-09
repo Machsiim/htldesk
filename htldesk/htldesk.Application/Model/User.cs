@@ -12,7 +12,7 @@ namespace htldesk.Application.Model
 
     [Index(nameof(Email), IsUnique = true)]
 
-    internal class User
+    public class User
     {
         #pragma warning disable CS8618
         protected User() { }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application.Model
 {
-    internal class File
+    public class File
     {
         public File(string name, string path, accountingAccount[] filecontent)
         {
@@ -15,9 +15,9 @@ namespace htldesk.Application.Model
             FileContent = filecontent;
 
         }
-#pragma warning disable CS8618
+        #pragma warning disable CS8618
         protected File() { }
-#pragma warning restore CS8618s
+        #pragma warning restore CS8618s
         public string Name { get; set; }
         public int Id { get; private set; }
         public accountingAccount[] FileContent { get; set; }

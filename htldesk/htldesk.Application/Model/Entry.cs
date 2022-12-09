@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace htldesk.Application
@@ -10,10 +13,10 @@ namespace htldesk.Application
     {
 
         #pragma warning disable CS8618
-        protected Entry() {};
+        protected Entry() {}
         #pragma warning restore CS8618
         
-        public Entry(int id, accountingAccount gegen, decimal haben, decimal soll, DateTime datum)
+        public Entry(accountingAccount gegen, decimal haben, decimal soll, DateTime datum)
         {
             this.GegenKonto = gegen; 
             this.Haben = haben;
