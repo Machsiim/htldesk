@@ -13,7 +13,7 @@ namespace htldesk.Application
         protected Entry() {};
         #pragma warning restore CS8618
         
-        public Entry(int id, accountingAccount gegen, decimal haben, decimal soll, DateTime datum)
+        public Entry(accountingAccount gegen, decimal haben, decimal soll, DateTime datum)
         {
             this.GegenKonto = gegen; 
             this.Haben = haben;
