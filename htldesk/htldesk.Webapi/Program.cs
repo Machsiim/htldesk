@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // SpengernewsContext ist der DbContext, der im Application Project angelegt wurde.
 // Aktiviere diese Zeile, wenn du den DB Context definiert hat.
 builder.Services.AddDbContext<htldeskContext>(opt =>
-    opt.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
+    opt.UseMySql(
+        builder.Configuration.GetConnectionString("MySql"),
+        new MariaDbServerVersion("10.10.2")));
 
 // Wir wollen automatisch nach Controllern im Ordner Controllers suchen.
 builder.Services.AddControllers();
@@ -32,9 +34,9 @@ if (app.Environment.IsDevelopment())
         using (var scope = app.Services.CreateScope())
            using (var db = scope.ServiceProvider.GetRequiredService<htldeskContext>())
            {
-               db.Database.EnsureDeleted();
-               db.Database.EnsureCreated();
-               db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
+               //db.Database.EnsureDeleted();
+               //db.Database.EnsureCreated();
+               //db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
            }
     app.UseCors();
 }
