@@ -7,11 +7,11 @@ using System.Linq;
 public class htldeskContext : DbContext
 {
     // TODO: Add your DbSets
-    public DbSet<User> Users { get; set; }
+    // Fix crash at Line 37 in program.cs caused by this
+    // public DbSet<User> Users { get; set; }
 
-#pragma warning disable CS8618 // Ein Non-Nullable-Feld muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie die Deklaration als Nullable.
     public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
-#pragma warning restore CS8618 // Ein Non-Nullable-Feld muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie die Deklaration als Nullable.
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Additional config
