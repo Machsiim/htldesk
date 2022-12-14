@@ -7,8 +7,8 @@ using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 // SpengernewsContext ist der DbContext, der im Application Project angelegt wurde.
 // Aktiviere diese Zeile, wenn du den DB Context definiert hat.
-// builder.Services.AddDbContext<SpengernewsContext>(opt =>
-//     opt.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
+builder.Services.AddDbContext<htldeskContext>(opt =>
+    opt.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
 
 // Wir wollen automatisch nach Controllern im Ordner Controllers suchen.
 builder.Services.AddControllers();
@@ -29,13 +29,13 @@ if (app.Environment.IsDevelopment())
 {
     // Im Development Mode erstellen wir bei jedem Serverstart die Datenbank neu.
     // Aktiviere diese Zeilen, wenn du den DB Context erstellt hat.
-    //     using (var scope = app.Services.CreateScope())
-    //        using (var db = scope.ServiceProvider.GetRequiredService<SpengernewsContext>())
-    //        {
-    //            db.Database.EnsureDeleted();
-    //            db.Database.EnsureCreated();
-    //            db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
-    //        }
+        using (var scope = app.Services.CreateScope())
+           using (var db = scope.ServiceProvider.GetRequiredService<htldeskContext>())
+           {
+               db.Database.EnsureDeleted();
+               db.Database.EnsureCreated();
+               db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
+           }
     app.UseCors();
 }
 // Liefert die statischen Dateien, die von VueJS generiert werden, aus.
