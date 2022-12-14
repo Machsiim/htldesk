@@ -1,15 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bogus;
+using htldesk.Application.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 public class htldeskContext : DbContext
 {
     // TODO: Add your DbSets
+    public DbSet<User> Users { get; set; }
 
+#pragma warning disable CS8618 // Ein Non-Nullable-Feld muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie die Deklaration als Nullable.
     public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
+#pragma warning restore CS8618 // Ein Non-Nullable-Feld muss beim Beenden des Konstruktors einen Wert ungleich NULL enthalten. Erwägen Sie die Deklaration als Nullable.
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Additional config
-
+       
         // Generic config for all entities
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
@@ -37,6 +43,20 @@ public class htldeskContext : DbContext
 
     public void Seed()
     {
-        // Seed logic.
+        Randomizer.Seed = new Random(1039);
+        var faker = new Faker("de");
+
+        var users = new Faker<User>("de").CustomInstantiator(f =>
+        {
+            return new User(
+                name: f.Name.LastName(),
+                email: f.Internet.Email(),
+                password: f.Internet.Password())
+            { Guid = f.Random.Guid() };
+        })
+        .Generate(30)
+        .ToList();
+        users.AddRange(users);
+        SaveChanges();
     }
 }

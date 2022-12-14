@@ -27,7 +27,7 @@ namespace htldesk.Application.Model
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; private set; }
+        public Guid Guid { get; set; }
         public string Name { get; set; }
         [MaxLength(25)]
         public string Email { get; set; }

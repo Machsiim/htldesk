@@ -34,9 +34,9 @@ if (app.Environment.IsDevelopment())
         using (var scope = app.Services.CreateScope())
            using (var db = scope.ServiceProvider.GetRequiredService<htldeskContext>())
            {
-               //db.Database.EnsureDeleted();
-               //db.Database.EnsureCreated();
-               //db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
+               if (!db.Database.EnsureDeleted()) Console.WriteLine("Ficken");
+                if (!db.Database.EnsureCreated()) Console.WriteLine("Ficken");
+        db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
            }
     app.UseCors();
 }
