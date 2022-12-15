@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Bogus.DataSets;
 using htldesk.Application.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,10 +8,11 @@ using System.Linq;
 public class htldeskContext : DbContext
 {
     // TODO: Add your DbSets
-    // Fix crash at Line 37 in program.cs caused by this
-    // public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
+    #pragma warning disable CS8618
     public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
+    #pragma warning restore CS8618
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -50,13 +52,13 @@ public class htldeskContext : DbContext
         {
             return new User(
                 name: f.Name.LastName(),
-                email: f.Internet.Email(),
+                email: $"{f.Name.FirstName()}@htldesk.at",
                 password: f.Internet.Password())
             { Guid = f.Random.Guid() };
         })
         .Generate(30)
         .ToList();
-        users.AddRange(users);
+        Users.AddRange(users);
         SaveChanges();
     }
 }
