@@ -3,16 +3,17 @@ using Bogus.DataSets;
 using htldesk.Application.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
+using File = htldesk.Application.Model.File;
 
 public class htldeskContext : DbContext
 {
     // TODO: Add your DbSets
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Users => Set<User>();
+    public DbSet<File> Files => Set<File>();
 
-    #pragma warning disable CS8618
     public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
-    #pragma warning restore CS8618
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -48,6 +49,7 @@ public class htldeskContext : DbContext
         Randomizer.Seed = new Random(1039);
         var faker = new Faker("de");
 
+        // Users
         var users = new Faker<User>("de").CustomInstantiator(f =>
         {
             return new User(
@@ -60,5 +62,23 @@ public class htldeskContext : DbContext
         .ToList();
         Users.AddRange(users);
         SaveChanges();
+
+        
+        // Files
+        var files = new Faker<File>("de").CustomInstantiator(f =>
+        {
+            return new File(
+                name: f.Name.LastName(),
+                path: f.Internet.Password(),
+                filecontent: null)
+
+            { Guid = f.Random.Guid() };
+        })
+        .Generate(30)
+        .ToList();
+        Users.AddRange(users);
+        SaveChanges();
+
+
     }
 }
