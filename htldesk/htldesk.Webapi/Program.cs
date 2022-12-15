@@ -15,7 +15,7 @@ builder.Services.AddDbContext<htldeskContext>(opt =>
 
 // Wir wollen automatisch nach Controllern im Ordner Controllers suchen.
 builder.Services.AddControllers();
-// Der Vue.JS Devserver läuft auf einem anderen Port, deswegen brauchen wir diese Konfiguration
+// Der Vue.JS Devserver lÃ¤uft auf einem anderen Port, deswegen brauchen wir diese Konfiguration
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddCors(options =>
@@ -35,7 +35,6 @@ if (app.Environment.IsDevelopment())
         using (var scope = app.Services.CreateScope())
            using (var db = scope.ServiceProvider.GetRequiredService<htldeskContext>())
            {
-            Console.WriteLine("Database fick deinen schwarzen Vater");
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
@@ -44,7 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 // Liefert die statischen Dateien, die von VueJS generiert werden, aus.
 app.UseStaticFiles();
-// Bearbeitet die Routen, für die wir Controller geschrieben haben.
+// Bearbeitet die Routen, fÃ¼r die wir Controller geschrieben haben.
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 app.Run();
