@@ -10,7 +10,7 @@ namespace htldesk.Application.Model
 {
     public class File
     {
-        public File(string name, string path, accountingAccount[]? filecontent)
+        public File(string name, string path, AccountingAccount[]? filecontent)
         {
             Name = name;
             Path = path;
@@ -26,7 +26,7 @@ namespace htldesk.Application.Model
         public Guid Guid { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }
-        public accountingAccount[]? FileContent { get; set; }
+        public AccountingAccount[]? FileContent { get; set; }
         
         [MaxLength(260)]
         public string Path { get; set; }

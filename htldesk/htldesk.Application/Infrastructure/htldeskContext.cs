@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Bogus.DataSets;
+using htldesk.Application;
 using htldesk.Application.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,13 +8,15 @@ using System.IO;
 using System.Linq;
 using File = htldesk.Application.Model.File;
 
-public class htldeskContext : DbContext
+public class HtldeskContext : DbContext
 {
     // TODO: Add your DbSets
     public DbSet<User> Users => Set<User>();
     public DbSet<File> Files => Set<File>();
+    public DbSet<Entry> Entries => Set<Entry>();
+    public DbSet<AccountingAccount> EAccountingAccountnts => Set<AccountingAccount>();
 
-    public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
+    public HtldeskContext(DbContextOptions<HtldeskContext> opt) : base(opt) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -69,16 +72,19 @@ public class htldeskContext : DbContext
         {
             return new File(
                 name: f.Name.LastName(),
-                path: f.Internet.Password(),
+                path: $"C:\\{f.Name.LastName()}\\{f.Name.LastName()}\\Desktop\\file.file",
                 filecontent: null)
 
             { Guid = f.Random.Guid() };
         })
         .Generate(30)
         .ToList();
-        Users.AddRange(users);
+        Files.AddRange(files);
         SaveChanges();
 
+        // AccountingAccount
+
+        // Entry
 
     }
 }
