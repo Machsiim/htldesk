@@ -16,7 +16,7 @@ namespace htldesk.Application
         protected Entry() {}
         #pragma warning restore CS8618
         
-        public Entry(accountingAccount gegen, decimal haben, decimal soll, DateTime datum)
+        public Entry(AccountingAccount gegen, decimal haben, decimal soll, DateTime datum)
         {
             this.GegenKonto = gegen; 
             this.Haben = haben;
@@ -26,8 +26,8 @@ namespace htldesk.Application
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int EntryId { get; private set; }
-        public accountingAccount GegenKonto { get; set; }
+        public int Id { get; private set; }
+        public AccountingAccount GegenKonto { get; set; }
         public decimal Haben { get; set; }
         public decimal Soll { get; set; }
         public DateTime Datum { get; set; }

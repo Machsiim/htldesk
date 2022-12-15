@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application
 {
-    public class accountingAccount
+    public class AccountingAccount
     {
         #pragma warning disable CS8618
-        protected accountingAccount() { }
+        protected AccountingAccount() { }
         #pragma warning restore CS8618
-        public accountingAccount(string name, string nachname, string email)
+        public AccountingAccount(string name, string nachname, string email)
         {
             Name = name;
             Nachname = nachname;
