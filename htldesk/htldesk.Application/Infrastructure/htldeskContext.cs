@@ -1,23 +1,18 @@
 ﻿using Bogus;
-using Bogus.DataSets;
-using htldesk.Application.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
+using htldesk.Application.Model;
 public class htldeskContext : DbContext
 {
     // TODO: Add your DbSets
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Users => Set<User>();
 
-    #pragma warning disable CS8618
     public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
-    #pragma warning restore CS8618
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Additional config
-       
+
         // Generic config for all entities
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {

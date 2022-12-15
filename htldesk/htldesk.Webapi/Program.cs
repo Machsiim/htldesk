@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 var builder = WebApplication.CreateBuilder(args);
 // SpengernewsContext ist der DbContext, der im Application Project angelegt wurde.
 // Aktiviere diese Zeile, wenn du den DB Context definiert hat.
@@ -34,6 +35,7 @@ if (app.Environment.IsDevelopment())
         using (var scope = app.Services.CreateScope())
            using (var db = scope.ServiceProvider.GetRequiredService<htldeskContext>())
            {
+            Console.WriteLine("Database fick deinen schwarzen Vater");
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             db.Seed();  // TODO: Implementiere diese Methode im Datenbankcontext.
@@ -44,6 +46,5 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 // Bearbeitet die Routen, für die wir Controller geschrieben haben.
 app.MapControllers();
-// Wichtig für das clientseitige Routing, damit wir direkt an eine URL in der Client App steuern können.
 app.MapFallbackToFile("index.html");
 app.Run();
