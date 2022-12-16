@@ -4,6 +4,7 @@ using htldesk.Application;
 using htldesk.Application.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using File = htldesk.Application.Model.File;
@@ -73,7 +74,7 @@ public class HtldeskContext : DbContext
             return new File(
                 name: f.Name.LastName(),
                 path: $"C:\\{f.Name.LastName()}\\{f.Name.LastName()}\\Desktop\\file.file",
-                filecontent: null)
+                filecontent: new List<AccountingAccount>())
 
             { Guid = f.Random.Guid() };
         })
@@ -86,8 +87,8 @@ public class HtldeskContext : DbContext
         var account = new Faker<AccountingAccount>("de").CustomInstantiator(f =>
         {
             return new AccountingAccount(
-                entries: new List<Entry>)
-            { Id = f.Random.Guid() };
+                entries: new List<Entry>())
+            { Guid = f.Random.Guid() };
         })
         .Generate(30)
         .ToList();
@@ -98,11 +99,11 @@ public class HtldeskContext : DbContext
         var entries = new Faker<Entry>("de").CustomInstantiator(f =>
         {
             return new Entry(
-                gegen: new AccountingAccount(),
+                gegen: new AccountingAccount(new List<Entry>()),
                 haben: f.Random.Int(0, 1000),
                 soll: f.Random.Int(0, 1000),
-                datum: f.Date.Between(('2020-01-01T00:00:00.000Z', '2030-01-01T00:00:00.000Z')))
-            { EntryId = f.Random.Guid()};
+                datum: f.Date.Past())
+            { Guid = f.Random.Guid()};
         }).Generate(30).ToList();
         Entries.AddRange(entries);
         SaveChanges();

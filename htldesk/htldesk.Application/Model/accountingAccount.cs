@@ -22,6 +22,7 @@ namespace htldesk.Application
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public Guid Guid { get; set; }
         public List<Entry> Entries { get; set; }
 
     }
