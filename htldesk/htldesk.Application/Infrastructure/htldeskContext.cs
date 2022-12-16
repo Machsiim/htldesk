@@ -1,15 +1,22 @@
 ﻿using Bogus;
+using Bogus.DataSets;
+using htldesk.Application;
+using htldesk.Application.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-using htldesk.Application.Model;
-public class htldeskContext : DbContext
+public class HtldeskContext : DbContext
 {
     // TODO: Add your DbSets
     public DbSet<User> Users => Set<User>();
+    public DbSet<File> Files => Set<File>();
+    public DbSet<Entry> Entries => Set<Entry>();
+    public DbSet<AccountingAccount> AccountingAccountnts => Set<AccountingAccount>();
 
-    public htldeskContext(DbContextOptions<htldeskContext> opt) : base(opt) { }
+    public HtldeskContext(DbContextOptions<HtldeskContext> opt) : base(opt) { }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
@@ -43,6 +50,7 @@ public class htldeskContext : DbContext
         Randomizer.Seed = new Random(1039);
         var faker = new Faker("de");
 
+        // Users
         var users = new Faker<User>("de").CustomInstantiator(f =>
         {
             return new User(
@@ -54,6 +62,47 @@ public class htldeskContext : DbContext
         .Generate(30)
         .ToList();
         Users.AddRange(users);
+        SaveChanges();
+
+        
+        // Files
+        var files = new Faker<File>("de").CustomInstantiator(f =>
+        {
+            return new File(
+                name: f.Name.LastName(),
+                path: $"C:\\{f.Name.LastName()}\\{f.Name.LastName()}\\Desktop\\file.file",
+                filecontent: new List<AccountingAccount>())
+
+            { Guid = f.Random.Guid() };
+        })
+        .Generate(30)
+        .ToList();
+        Files.AddRange(files);
+        SaveChanges();
+
+        // AccountingAccount
+        var account = new Faker<AccountingAccount>("de").CustomInstantiator(f =>
+        {
+            return new AccountingAccount(
+                entries: new List<Entry>())
+            { Guid = f.Random.Guid() };
+        })
+        .Generate(30)
+        .ToList();
+        AccountingAccountnts.AddRange(account);
+        SaveChanges();
+
+        // Entry
+        var entries = new Faker<Entry>("de").CustomInstantiator(f =>
+        {
+            return new Entry(
+                gegen: new AccountingAccount(new List<Entry>()),
+                haben: f.Random.Int(0, 1000),
+                soll: f.Random.Int(0, 1000),
+                datum: f.Date.Past())
+            { Guid = f.Random.Guid()};
+        }).Generate(30).ToList();
+        Entries.AddRange(entries);
         SaveChanges();
     }
 }

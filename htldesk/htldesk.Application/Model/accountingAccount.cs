@@ -1,26 +1,25 @@
-﻿using System;
+using Bogus.DataSets;
+using htldesk.Application;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace htldesk.Application
+public class AccountingAccount
 {
-    public class AccountingAccount
+
+    public AccountingAccount(List<Entry> entries)
     {
-        #pragma warning disable CS8618
-        protected AccountingAccount() { }
-        #pragma warning restore CS8618
-        public AccountingAccount(string name, string nachname, string email)
-        {
-            Name = name;
-            Nachname = nachname;
-            Email = email;
-        }
-
-        public string Name { get; set; }
-        public string Nachname { get; set; }
-        public string Email { get; set; }
-
+        Entries = entries;
     }
+#pragma warning disable CS8618
+    protected AccountingAccount() { }
+#pragma warning restore CS8618
+
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    public Guid Guid { get; set; }
+    public List<Entry> Entries { get; set; }
+
 }

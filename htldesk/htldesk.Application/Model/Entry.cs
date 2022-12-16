@@ -27,6 +27,7 @@ namespace htldesk.Application
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
+        public Guid Guid { get; set; }
         public AccountingAccount GegenKonto { get; set; }
         public decimal Haben { get; set; }
         public decimal Soll { get; set; }
