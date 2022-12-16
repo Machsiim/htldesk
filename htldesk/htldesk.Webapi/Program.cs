@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 // SpengernewsContext ist der DbContext, der im Application Project angelegt wurde.
 // Aktiviere diese Zeile, wenn du den DB Context definiert hat.
-builder.Services.AddDbContext<htldeskContext>(opt =>
+builder.Services.AddDbContext<HtldeskContext>(opt =>
     opt.UseMySql(
         builder.Configuration.GetConnectionString("MySql"),
         new MariaDbServerVersion("10.10.2")));
@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
     // Im Development Mode erstellen wir bei jedem Serverstart die Datenbank neu.
     // Aktiviere diese Zeilen, wenn du den DB Context erstellt hat.
         using (var scope = app.Services.CreateScope())
-           using (var db = scope.ServiceProvider.GetRequiredService<htldeskContext>())
+           using (var db = scope.ServiceProvider.GetRequiredService<HtldeskContext>())
            {
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
