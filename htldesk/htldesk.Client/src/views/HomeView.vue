@@ -1,9 +1,10 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import FilePanel from '../components/FilePanel.vue';
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+      <FilePanel>Ich bin ein FilePanel</FilePanel>
+  </div>
 </template>
