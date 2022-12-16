@@ -11,11 +11,9 @@ namespace htldesk.Application
     public class AccountingAccount
     {
         
-        public AccountingAccount(string name, string nachname, string email)
+        public AccountingAccount(List<Entry> entries)
         {
-            Name = name;
-            Nachname = nachname;
-            Email = email;
+            Entries= entries;
         }
         #pragma warning disable CS8618
         protected AccountingAccount() { }
@@ -23,10 +21,8 @@ namespace htldesk.Application
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Guid { get; set; }
-        public string Name { get; set; }
-        public string Nachname { get; set; }
-        public string Email { get; set; }
+        public int Id { get; set; }
+        public List<Entry> Entries { get; set; }
 
     }
 }
