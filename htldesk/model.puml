@@ -11,12 +11,12 @@ entity User {
 
 entity File {
     + Id : int
-    + accountingAccounts : accountingAccount[]
+    + accountingAccounts : List<AccountingAccount>
 }
 
 entity accountingAccount {
         + AccountID : int
-        + Entry : Entry[]
+        + Entries : List<Entry>
 }
 
 entity Entry {
