@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 var builder = WebApplication.CreateBuilder(args);
 // SpengernewsContext ist der DbContext, der im Application Project angelegt wurde.
 // Aktiviere diese Zeile, wenn du den DB Context definiert hat.
@@ -14,7 +15,7 @@ builder.Services.AddDbContext<HtldeskContext>(opt =>
 
 // Wir wollen automatisch nach Controllern im Ordner Controllers suchen.
 builder.Services.AddControllers();
-// Der Vue.JS Devserver läuft auf einem anderen Port, deswegen brauchen wir diese Konfiguration
+// Der Vue.JS Devserver lÃ¤uft auf einem anderen Port, deswegen brauchen wir diese Konfiguration
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddCors(options =>
@@ -42,8 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 // Liefert die statischen Dateien, die von VueJS generiert werden, aus.
 app.UseStaticFiles();
-// Bearbeitet die Routen, für die wir Controller geschrieben haben.
+// Bearbeitet die Routen, fÃ¼r die wir Controller geschrieben haben.
 app.MapControllers();
-// Wichtig für das clientseitige Routing, damit wir direkt an eine URL in der Client App steuern können.
 app.MapFallbackToFile("index.html");
 app.Run();

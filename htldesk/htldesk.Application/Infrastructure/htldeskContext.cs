@@ -2,12 +2,6 @@
 using Bogus.DataSets;
 using htldesk.Application;
 using htldesk.Application.Model;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using File = htldesk.Application.Model.File;
 
 public class HtldeskContext : DbContext
 {
@@ -21,8 +15,7 @@ public class HtldeskContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Additional config
-       
+
         // Generic config for all entities
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {

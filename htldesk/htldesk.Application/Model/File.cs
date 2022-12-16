@@ -10,6 +10,7 @@ namespace htldesk.Application.Model
 {
     public class File
     {
+
         public File(string name, string path, List<AccountingAccount> filecontent)
         {
             Name = name;
