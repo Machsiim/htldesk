@@ -3,9 +3,16 @@
 namespace htldesk.Webapi.Controllers
 {
     [ApiController]               // Muss bei jedem Controller stehen
-    [Route("/user/[controller]")]  // Muss bei jedem Controller stehen
-    public class NewsController : ControllerBase
+    [Route("/api/users")]  // Muss bei jedem Controller stehen
+    public class userController : ControllerBase
     {
+
+        private readonly HtldeskContext _context;
+        
+        public userController(HtldeskContext context)
+        {
+            _context = context;
+        }
 
         // Reagiert auf GET /api/news
         [HttpGet]
