@@ -2,6 +2,10 @@
 using Bogus.DataSets;
 using htldesk.Application;
 using htldesk.Application.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class HtldeskContext : DbContext
 {

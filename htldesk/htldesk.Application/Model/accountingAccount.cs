@@ -1,36 +1,25 @@
-using System;
+using Bogus.DataSets;
+using htldesk.Application;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace htldesk.Application
+public class AccountingAccount
 {
-    public class Entry
+
+    public AccountingAccount(List<Entry> entries)
     {
-
-        #pragma warning disable CS8618
-        protected Entry() {}
-        #pragma warning restore CS8618
-        
-        public Entry(AccountingAccount gegen, decimal haben, decimal soll, DateTime datum)
-        {
-            this.GegenKonto = gegen; 
-            this.Haben = haben;
-            this.Soll = soll; 
-            this.Datum = datum;
-        }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; private set; }
-        public Guid Guid { get; set; }
-        public AccountingAccount GegenKonto { get; set; }
-        public decimal Haben { get; set; }
-        public decimal Soll { get; set; }
-        public DateTime Datum { get; set; }
+        Entries = entries;
     }
+#pragma warning disable CS8618
+    protected AccountingAccount() { }
+#pragma warning restore CS8618
+
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    public Guid Guid { get; set; }
+    public List<Entry> Entries { get; set; }
+
 }
