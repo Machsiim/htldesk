@@ -14,7 +14,7 @@ public class HtldeskContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<File> Files => Set<File>();
     public DbSet<Entry> Entries => Set<Entry>();
-    public DbSet<AccountingAccount> EAccountingAccountnts => Set<AccountingAccount>();
+    public DbSet<AccountingAccount> AccountingAccountnts => Set<AccountingAccount>();
 
     public HtldeskContext(DbContextOptions<HtldeskContext> opt) : base(opt) { }
 
@@ -83,8 +83,28 @@ public class HtldeskContext : DbContext
         SaveChanges();
 
         // AccountingAccount
+        var account = new Faker<AccountingAccount>("de").CustomInstantiator(f =>
+        {
+            return new AccountingAccount(
+                entries: new List<Entry>)
+            { Id = f.Random.Guid() };
+        })
+        .Generate(30)
+        .ToList();
+        AccountingAccountnts.AddRange(account);
+        SaveChanges();
 
         // Entry
-
+        var entries = new Faker<Entry>("de").CustomInstantiator(f =>
+        {
+            return new Entry(
+                gegen: new AccountingAccount(),
+                haben: f.Random.Int(0, 1000),
+                soll: f.Random.Int(0, 1000),
+                datum: f.Date.Between(('2020-01-01T00:00:00.000Z', '2030-01-01T00:00:00.000Z')))
+            { EntryId = f.Random.Guid()};
+        }).Generate(30).ToList();
+        Entries.AddRange(entries);
+        SaveChanges();
     }
 }
