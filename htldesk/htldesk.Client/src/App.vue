@@ -1,18 +1,13 @@
 
 <template>
   <header>
-    
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
+      <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 
