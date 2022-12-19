@@ -1,6 +1,6 @@
 @echo off
-REM docker start mariadb 2> null
-REM if errorlevel 1 docker run --name mariadb -d -p 13306:3306 -e MARIADB_USER=root -e MARIADB_ROOT_PASSWORD=mariadb_root_password mariadb:10.10.2
+docker start mariadb 2> null
+if errorlevel 1 docker run --name mariadb -d -p 13306:3306 -e MARIADB_USER=root -e MARIADB_ROOT_PASSWORD=mariadb_root_password mariadb:10.10.2
 
 rd /S /Q .vs 2> nul
 rd /S /Q htldesk.Application/.vs 2> nul
