@@ -32,6 +32,8 @@ namespace htldesk.Application.Model
 
         [MaxLength(260)]
         public string Path { get; set; }
+        
+        public Guid UserGuid { get; private set; }
 
     }
 }

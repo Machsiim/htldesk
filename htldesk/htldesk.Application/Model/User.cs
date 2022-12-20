@@ -11,6 +11,7 @@ namespace htldesk.Application.Model
 {
 
     [Index(nameof(Email), IsUnique = true)]
+    [Index(nameof(Username), IsUnique = true)]
 
     public class User
     {
@@ -20,7 +21,7 @@ namespace htldesk.Application.Model
 
         public User(string name, string email, string password)
         {
-            Name = name;
+            Username = name;
             Email = email;
             Password = password;
         }
@@ -29,8 +30,7 @@ namespace htldesk.Application.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
         public Guid Guid { get; set; }
-        public string Name { get; set; }
-        [MaxLength(25)]
+        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }

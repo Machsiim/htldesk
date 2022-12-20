@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application.Dto
 {
-    public record UserDto(
+    public record FileDto(
         Guid Guid,
-        
+
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Die Länge des Namens ist ungültig.")]
         string Username,
 
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Die Länge der Email ist ungültig."), DataType(DataType.EmailAddress)]
-        string Email, 
-        
+        string Email,
+
         string Password)
     {
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            // We have registered SpengernewsContext in Program.cs in ASP.NET core. So we can
+            // get this service to access the database for further validation.
             var db = validationContext.GetRequiredService<HtldeskContext>();
             if (db.Users.Any(u => u.Username == Username))
             {
@@ -30,5 +32,5 @@ namespace htldesk.Application.Dto
         }
 
     }
-    
+
 }

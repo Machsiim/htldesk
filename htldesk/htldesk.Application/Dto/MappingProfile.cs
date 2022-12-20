@@ -12,8 +12,8 @@ namespace htldesk.Application.Dto
     {
         public MappingProfile()
         {
-            CreateMap<UserDto, User>();  // ArticleDto --> Article
-            CreateMap<User, UserDto>();  // Article --> ArticleDto
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

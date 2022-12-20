@@ -59,7 +59,7 @@ public class HtldeskContext : DbContext
                 password: f.Internet.Password())
             { Guid = f.Random.Guid() };
         })
-        .Generate(30)
+        .Generate(10)
         .ToList();
         Users.AddRange(users);
         SaveChanges();
