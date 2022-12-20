@@ -1,3 +1,4 @@
+using htldesk.Application.Dto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ if (builder.Environment.IsDevelopment())
 // *************************************************************************************************
 // APPLICATION
 // *************************************************************************************************
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 // Leitet http auf https weiter (http Port 5000 auf https Port 5001)
 app.UseHttpsRedirection();

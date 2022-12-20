@@ -14,13 +14,13 @@ namespace htldesk.Webapi.Controllers
             _context = context;
         }
 
-        // Reagiert auf GET /api/news
+        
         [HttpGet]
         public IActionResult GetAllNews()
         {
             return Ok(new string[] { "News 1", "News 2" });
         }
-        // Reagiert z. B. auf /api/news/14
+
         [HttpGet("{id:int}")]
         public IActionResult GetNewsDetail(int id)
         {
