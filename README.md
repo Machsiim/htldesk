@@ -37,4 +37,4 @@ Wenn du jedoch am Frontend was geändert hast, musst du vor jeder Ausführung ei
 
 
 
-PS: Stand 17.12.2022 11:49: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.
+PS: Stand 20.12.2022 16:12: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.
