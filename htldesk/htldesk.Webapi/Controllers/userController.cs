@@ -28,11 +28,12 @@ namespace htldesk.Webapi.Controllers
             return Ok(new string[] { "News 1", "News 2" });
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult GetNewsDetail(int id)
+        [HttpGet("{username:alpha}")]
+        public IActionResult GetNewsDetail(string username)
         {
-            if (id < 1000) { return NotFound(); }
-            return Ok($"News {id}");
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+            if (user is null) return BadRequest();
+            return Ok("E-Mail vom " + user.Username + ": " + user.Email);
         }
 
         [HttpPost]
