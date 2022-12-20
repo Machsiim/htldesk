@@ -6,10 +6,13 @@ Folgende Software wird benötigt: Docker, DBeaver.
 
 Optional: 13 Gehirnzellen
 
-Schritt 1:
-startServer.bat im ersten Unterordner ausführen.
+Schritt 1: 
+Das Programm Docker starten.
 
 Schritt 2:
+startServer.bat im ersten Unterordner ausführen.
+
+Schritt 3:
 Wenn das deine erste Ausführung des Projekts ist, musst du erstmal eine neue Database in DBeaver hinzufügen.
 Dazu DBeaver starten und unter Database/New Database Connection die Datenbank eingeben.
 MariaDB --Next-->
