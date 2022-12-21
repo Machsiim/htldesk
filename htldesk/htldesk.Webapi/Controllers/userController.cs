@@ -22,10 +22,11 @@ namespace htldesk.Webapi.Controllers
         private readonly IMapper _mapper;
         private readonly HtldeskContext _db;
 
-        public UserController(HtldeskContext db, IMapper mapper)
+        public UserController(HtldeskContext db, IMapper mapper, IConfiguration config)
         {
             _db = db;
             _mapper = mapper;
+            _config = config;
         }
 
 
@@ -43,16 +44,15 @@ namespace htldesk.Webapi.Controllers
             return Ok("E-Mail vom " + user.Username + ": " + user.Email);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult RegisterUser(UserDto userDto)
         {
-            var user = _mapper.Map<User>(userDto,
-            opt => opt.AfterMap((dto, entity) =>
-            { }));
+            Console.WriteLine("register drinnen");
+            var user = new User(userDto.Username, userDto.Email, userDto.Password);
             _db.Users.Add(user);
             try { _db.SaveChanges(); }
             catch (DbUpdateException) { return BadRequest(); } // DB constraint violations, ...
-            return Ok(_mapper.Map<User, UserDto>(user));
+            return Ok("Register durchgegangen");
         }
 
         [HttpPost("login")]
