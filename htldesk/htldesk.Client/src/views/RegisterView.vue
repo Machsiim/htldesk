@@ -6,16 +6,23 @@
   <label for="username">Username:</label>
   <input v-model="form.username" type="text" id="username" name="username" required>
   <br>
+  
   <small class="error"></small>
+  <hr>
   <label for="email">Email:</label>
   <input v-model="form.email" type="text" id="email" name="email" required>
   <br>
+  
   <small class="error"></small>
+  <hr>
   <label for="password">Password:</label>
   <input v-model="form.password" type="password" id="password" name="password" required>
   <br>
+  
   <small class="error"></small>
+  <hr>
   <input type="submit" value="Submit">
+  
   <p id="success"></p>
 </form> 
 </div>
@@ -92,4 +99,12 @@ methods: {
 }
 };
 </script>
+<style>
+.error {
+  color: red !important;
+}
+body, html {
+  background-color: #1F6032 !important;
+}
+</style>
   
