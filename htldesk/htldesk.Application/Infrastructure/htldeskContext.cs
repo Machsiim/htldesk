@@ -59,7 +59,7 @@ public class HtldeskContext : DbContext
                 password: f.Internet.Password())
             { Guid = f.Random.Guid() };
         })
-        .Generate(30)
+        .Generate(10)
         .ToList();
         Users.AddRange(users);
         SaveChanges();
@@ -70,8 +70,7 @@ public class HtldeskContext : DbContext
         {
             return new File(
                 name: f.Name.LastName(),
-                path: $"C:\\{f.Name.LastName()}\\{f.Name.LastName()}\\Desktop\\file.file",
-                filecontent: new List<AccountingAccount>())
+                userGuid: f.Random.Guid())
 
             { Guid = f.Random.Guid() };
         })
