@@ -24,6 +24,7 @@ namespace htldesk.Application.Model
         {
             Username = name;
             Email = email;
+            Password = password;
             SetPassword(password);
         }
 
