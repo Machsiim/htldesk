@@ -24,7 +24,6 @@ namespace htldesk.Application.Model
         {
             Username = name;
             Email = email;
-            Password = password;
             SetPassword(password);
         }
 
@@ -34,7 +33,6 @@ namespace htldesk.Application.Model
         public Guid Guid { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
 
 
 
