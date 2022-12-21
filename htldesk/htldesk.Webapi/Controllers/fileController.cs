@@ -4,12 +4,12 @@ namespace htldesk.Webapi.Controllers
 {
     [ApiController]               // Muss bei jedem Controller stehen
     [Route("/api/files")]  // Muss bei jedem Controller stehen
-    public class fileController : ControllerBase
+    public class FileController : ControllerBase
     {
 
         private readonly HtldeskContext _db;
         
-        public fileController(HtldeskContext context)
+        public FileController(HtldeskContext context)
         {
             _db = context;
         }
