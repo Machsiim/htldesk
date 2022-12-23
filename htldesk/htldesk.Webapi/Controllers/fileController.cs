@@ -14,7 +14,7 @@ namespace htldesk.Webapi.Controllers
         private readonly IConfiguration _config;
         private readonly HtldeskContext _db;
         
-        public FileController(HtldeskContext context)
+        public FileController(HtldeskContext context, IConfiguration config)
         {
             _db = context;
             _config = config;
