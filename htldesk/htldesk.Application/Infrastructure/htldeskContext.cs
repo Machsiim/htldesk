@@ -56,7 +56,7 @@ public class HtldeskContext : DbContext
             return new User(
                 name: f.Name.LastName(),
                 email: $"{f.Name.FirstName()}@htldesk.at",
-                password: f.Internet.Password())
+                password: "1111")
             { Guid = f.Random.Guid() };
         })
         .Generate(10)

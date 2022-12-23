@@ -52,7 +52,6 @@ import axios from 'axios';
             username: this.username,
             password: this.password
           })
-          this.$router.push('/login')
         } catch (error) {
           console.error(error)
           // Display an error message to the user
