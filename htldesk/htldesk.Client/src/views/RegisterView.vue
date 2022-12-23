@@ -47,7 +47,7 @@ import axios from 'axios';
           return
         }
         try {
-          await axios.post('https://localhost:5001/api/users', {
+          await axios.post('https://localhost:5001/api/users/register', {
             email: this.email,
             username: this.username,
             password: this.password

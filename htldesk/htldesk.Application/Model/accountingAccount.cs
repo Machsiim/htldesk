@@ -8,9 +8,10 @@ using System.ComponentModel.DataAnnotations;
 public class AccountingAccount
 {
 
-    public AccountingAccount(List<Entry> entries)
+    public AccountingAccount(string name, Guid fileGuid)
     {
-        Entries = entries;
+        Name = name;
+        FileGuid = fileGuid;
     }
 #pragma warning disable CS8618
     protected AccountingAccount() { }
@@ -20,6 +21,8 @@ public class AccountingAccount
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public Guid Guid { get; set; }
-    public List<Entry> Entries { get; set; }
+    public string Name { get; set; }
+    public Guid FileGuid { get; set; }
+    public List<Entry>? Entries { get; set; }
 
 }

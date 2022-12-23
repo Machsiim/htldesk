@@ -1,9 +1,13 @@
+<script setup>
+import axios from 'axios';
+</script>
+
 <template>
     <div>
       <form @submit.prevent="login">
         <label>
-          Email:
-          <input v-model="email" type="email" required />
+           Username:
+          <input v-model="email" type="username" required />
         </label>
         <br />
         <label>
@@ -20,15 +24,15 @@
   export default {
     data() {
       return {
-        email: '',
+        username: '',
         password: ''
       }
     },
     methods: {
   async login() {
     try {
-      const response = await axios.post('/api/users', {
-        email: this.email,
+      const response = await axios.post('/api/users/login', {
+        username: this.username,
         password: this.password
       })
       const jwt = response.data.jwt

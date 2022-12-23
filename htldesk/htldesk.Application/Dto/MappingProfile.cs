@@ -14,6 +14,13 @@ namespace htldesk.Application.Dto
         {
             CreateMap<UserDto, User>();
             CreateMap<User, UserDto>();
+            CreateMap<FileDto, File>();
+            CreateMap<File, FileDto>();
+            CreateMap<AccountingAccountDto, AccountingAccount>();
+            CreateMap<AccountingAccount, AccountingAccountDto>();
+            CreateMap<EntriesDto, Entry>();
+            CreateMap<Entry, EntriesDto>();
+
         }
     }
 }
