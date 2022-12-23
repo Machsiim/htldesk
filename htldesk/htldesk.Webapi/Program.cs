@@ -1,8 +1,12 @@
+using htldesk.Application.Dto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +26,24 @@ if (builder.Environment.IsDevelopment())
         options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 }
 
+byte[] secret = Convert.FromBase64String(builder.Configuration["Secret"]);
+builder.Services
+    .AddAuthentication(options => options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(secret),
+            ValidateAudience = false,
+            ValidateIssuer = false
+        };
+    });
+
 // *************************************************************************************************
 // APPLICATION
 // *************************************************************************************************
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 // Leitet http auf https weiter (http Port 5000 auf https Port 5001)
 app.UseHttpsRedirection();
@@ -41,9 +60,12 @@ if (app.Environment.IsDevelopment())
            }
     app.UseCors();
 }
+
+
 // Liefert die statischen Dateien, die von VueJS generiert werden, aus.
 app.UseStaticFiles();
 // Bearbeitet die Routen, für die wir Controller geschrieben haben.
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 app.Run();
+
