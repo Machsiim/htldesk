@@ -2,8 +2,8 @@
     <div>
       <form @submit.prevent="login">
         <label>
-          Email:
-          <input v-model="email" type="email" required />
+           Username:
+          <input v-model="username" type="username" required />
         </label>
         <br />
         <label>
@@ -16,32 +16,41 @@
     </div>
   </template>
   
-  <script>
-  export default {
+   <script>
+export default {
     data() {
-      return {
-        email: '',
-        password: ''
-      }
+        return {
+            model: {
+                username: '',
+                password: '',
+            },
+        };
     },
     methods: {
-  async login() {
-    try {
-      const response = await axios.post('/api/users', {
-        email: this.email,
-        password: this.password
-      })
-      const jwt = response.data.jwt
-      // Save the JWT in local storage or a cookie
-      localStorage.setItem('jwt', jwt)
-      // Redirect the user to the dashboard or some other protected route
-      this.$router.push('/dashboard')
-    } catch (error) {
-      console.error(error)
-      // Display an error message to the user
-      this.errorMessage = 'Invalid email or password'
-    }
-  }
-}
-  }
-  </script>
+        deleteToken() {
+            delete axios.defaults.headers.common['Authorization'];
+            this.$store.commit('authenticate', null);
+        },
+        async sendLoginData() {
+            try {
+                const userdata = (await axios.post('api/users/login', this.model)).data;
+                console.log(userdata);
+                axios.defaults.headers.common['Authorization'] = `Bearer ${userdata.token}`;
+                this.$store.commit('authenticate', userdata);
+            } catch (e) {
+                if (e.response.status == 401) {
+                    alert('Login failed. Invalid credentials.');
+                }
+            }
+        },
+    },
+    computed: {
+        authenticated() {
+            return this.$store.state.user.isLoggedIn;
+        },
+        username() {
+            return this.$store.state.user.name;
+        }
+    },
+};
+</script>

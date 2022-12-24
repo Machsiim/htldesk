@@ -42,7 +42,7 @@ export default {
     },
     mounted: async function () {
         try {
-            const res = await fetch('https://localhost:5001/api/files');
+            const res = await fetch('https://localhost:5001/api/files/');
             if (!res.ok) {
                 alert('Problem beim Laden der Daten.');
             }
