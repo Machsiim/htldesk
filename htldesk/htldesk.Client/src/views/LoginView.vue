@@ -1,22 +1,22 @@
+<script setup>
+import axios from 'axios';
+</script>
+
 <template>
-    <div>
-      <form @submit.prevent="login">
-        <label>
-           Username:
-          <input v-model="username" type="username" required />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input v-model="password" type="password" required />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
+    <div class="loginForm">
+        <template v-if="!authenticated">
+            <label>Username: <input type="text" v-model="model.username" /></label>
+            <label>Password: <input type="password" v-model="model.password" /></label>
+            <button type="button" v-on:click="sendLoginData">Submit</button>
+            (Hint: Use lenz, Password 1111)
+        </template>
+        <template v-else>
+            Angemeldet als {{ username }}
+            <a href="javascript:void(0)" v-on:click="deleteToken">Abmelden</a>
+        </template>
     </div>
-  </template>
-  
-   <script>
+</template>
+<script>
 export default {
     data() {
         return {
@@ -33,8 +33,7 @@ export default {
         },
         async sendLoginData() {
             try {
-                const userdata = (await axios.post('api/users/login', this.model)).data;
-                console.log(userdata);
+                const userdata = (await axios.post('/users/login', this.model)).data;
                 axios.defaults.headers.common['Authorization'] = `Bearer ${userdata.token}`;
                 this.$store.commit('authenticate', userdata);
             } catch (e) {
