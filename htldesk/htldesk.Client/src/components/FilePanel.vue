@@ -4,14 +4,6 @@ import File from './File.vue';
 
 <template>
     <div>
-        <h3>
-            {{ newsCount }} von {{ newsItems.length }} Files.&nbsp;
-            <button @click="newsCount++">more</button>&nbsp;
-            <button @click="newsCount--">less</button>
-            <br>
-            <br>
-
-        </h3>
         <div class="newsImages">
             <template v-if="newsItems.length">
                 <File
@@ -42,7 +34,7 @@ export default {
     },
     mounted: async function () {
         try {
-            const res = await fetch('https://localhost:5001/api/files/');
+            const res = await fetch('https://localhost:5001/api/files/'+ this.$store.state.user.username);
             if (!res.ok) {
                 alert('Problem beim Laden der Daten.');
             }

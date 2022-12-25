@@ -1,10 +1,11 @@
 <script setup>
 import axios from 'axios';
+import FilePanel from '../components/FilePanel.vue';
 </script>
 
+
 <template>
-    <h1>Willkommen, {{ username }}</h1>
-    
+    <div class="welcome">Willkommen, {{ username }}</div>
 </template>
 
 <script>
@@ -18,9 +19,6 @@ import axios from 'axios';
         };
     },
     computed: {
-        authenticated() {
-            return this.$store.state.user.isLoggedIn;
-        },
         username() {
             return this.$store.state.user.name;
         },
@@ -31,3 +29,11 @@ import axios from 'axios';
 };
 
 </script>
+
+<style>
+    .welcome {
+        font-size: 2em;
+        margin-top: 8%;
+        text-align: center;
+    }
+</style>
