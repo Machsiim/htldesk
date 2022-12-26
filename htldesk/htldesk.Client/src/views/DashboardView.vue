@@ -1,9 +1,33 @@
 <script setup>
-    import FilePanel from '../components/FilePanel.vue';
+import axios from 'axios';
 </script>
 
 <template>
-    <div>
-        <FilePanel>Ich bin ein FilePanel</FilePanel>
-    </div>
+    <h1>Willkommen, {{ username }}</h1>
+    
 </template>
+
+<script>
+    export default {
+    data() {
+        return {
+            model: {
+                username: '',
+                password: '',
+            },
+        };
+    },
+    computed: {
+        authenticated() {
+            return this.$store.state.user.isLoggedIn;
+        },
+        username() {
+            return this.$store.state.user.name;
+        },
+        getGuid() {
+            return this.$store.state.user.guid;
+        }
+    },
+};
+
+</script>
