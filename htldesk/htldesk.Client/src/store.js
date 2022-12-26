@@ -13,10 +13,10 @@ export default createStore({
     mutations: {
         authenticate(state, userdata) {
             if (!userdata) {
-                state.user = { name: "", guid: "", isLoggedIn: false };
+                state.user = { username: "", guid: "", isLoggedIn: false };
                 return;
             }
-            state.user.name = userdata.username;
+            state.user.username = userdata.username;
             state.user.guid = userdata.userGuid;
             state.user.isLoggedIn = true;
         }

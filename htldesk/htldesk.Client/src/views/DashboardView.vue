@@ -23,7 +23,7 @@ import FilePanel from '../components/FilePanel.vue';
     },
     computed: {
         username() {
-            return this.$store.state.user.name;
+            return this.$store.state.user.username;
         }
     },
 };

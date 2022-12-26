@@ -48,7 +48,7 @@ export default {
             return this.$store.state.user.isLoggedIn;
         },
         username() {
-            return this.$store.state.user.name;
+            return this.$store.state.user.username;
         }
     },
 };
