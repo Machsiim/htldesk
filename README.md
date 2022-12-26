@@ -11,6 +11,8 @@ Schritt 2: startServer.bat im ersten Unterordner ausführen.
 
 Schritt 3: Wenn das deine erste Ausführung des Projekts ist, musst du erstmal eine neue Database in DBeaver hinzufügen. Dazu DBeaver starten und unter Database/New Database Connection die Datenbank eingeben. MariaDB --Next--> Port: 13306, Database leer lassen, Username: root, Password: mariadb_root_password, --Finish-->
 
+Frontend Extra Schritt: Wenn du deine Änderungen auf den Server draufspielen willst und nicht nur in Dev arbeiten willst, musst du nach jeder Veränderung "npm run build" ausführen. Dabei nicht vergessen im htldesk/htldesk/htldesk.Client Verzeichnis sein. (Den Server muss man nicht neustarten, da dieser die Änderungen normalerweise live übernehmen sollte.
+
 Sonst Right Click auf localhost:13306 und Refresh.
 
 2) Ich will am Projekt arbeiten. Was soll ich machen?
@@ -21,6 +23,6 @@ Wenn du nun weißt, an was du arbeiten willst, musst du erstmal in den richtigen
 3) Ich hab jetzt was geändert, aber wenn ich den Server starte, ändert sich nichts. Was ist los?
 Wenn du in Visual Studio was am Backend geändert hast, darfst du nicht vergessen, alle Datein mit STRG + S zu speichern. Im Gegensatz zur Build Aktion in Visual Studio, werden die Datein nicht gespeichert.
 
-Wenn du jedoch am Frontend was geändert hast, musst du vor jeder Ausführung einen extra Schritt erledigen. In der Visual Studio oder in CMD musst du ins dich Verzeichnis "C:\HTL Desk Projekt\htldesk\htldesk\htldesk.Client" navigieren und dort "npm run build" ausführen. Jetzt sollte alles funktionieren.
+Wenn du jedoch am Frontend was geändert hast, musst du vor jeder Ausführung einen extra Schritt erledigen. In Visual Studio oder in CMD musst du dich ins Verzeichnis "C:\HTL Desk Projekt\htldesk\htldesk\htldesk.Client" navigieren und dort "npm run build" ausführen. Jetzt sollte alles funktionieren.
 
 PS: Stand 20.12.2022 16:13: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.
