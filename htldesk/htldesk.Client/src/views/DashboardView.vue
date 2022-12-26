@@ -5,7 +5,10 @@ import FilePanel from '../components/FilePanel.vue';
 
 
 <template>
-    <div class="welcome">Willkommen, {{ username }}</div>
+    <div>
+        <div class="welcome">Willkommen, {{ username }}</div>
+      <FilePanel>Ich bin ein FilePanel</FilePanel>
+  </div>
 </template>
 
 <script>
@@ -21,9 +24,6 @@ import FilePanel from '../components/FilePanel.vue';
     computed: {
         username() {
             return this.$store.state.user.name;
-        },
-        getGuid() {
-            return this.$store.state.user.guid;
         }
     },
 };

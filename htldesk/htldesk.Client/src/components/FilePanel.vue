@@ -3,28 +3,14 @@ import File from './File.vue';
 </script>
 
 <template>
-    <div>
-        <div class="newsImages">
-            <template v-if="newsItems.length">
-                <File
-                    v-for="item in displayNews"
-                    v-bind:key="item.id"
-                    :id="item.id"
-                    :name="item.name"
-                    :path="item.path"
-                ></File>
-                
-            </template>
-        </div>
-    </div>
+    <h1>{{ FileName }}</h1>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            newsCount: 3,
-            newsItems: [],
+            FileName: 'Hier sollte was sein'
         };
     },
     computed: {
@@ -34,12 +20,13 @@ export default {
     },
     mounted: async function () {
         try {
-            const res = await fetch('https://localhost:5001/api/files/'+ this.$store.state.user.username);
+            const res = await fetch('https://localhost:5001/api/files/Lenz');
             if (!res.ok) {
                 alert('Problem beim Laden der Daten.');
             }
-            this.newsItems = await res.json();
-            this.count = 10;
+            FileName = res.json().then((data) => {
+                this.FileName = data;
+            })
         } catch (e) {
             alert('Der Server ist nicht erreichbar.');
         }
