@@ -25,4 +25,4 @@ Wenn du in Visual Studio was am Backend geändert hast, darfst du nicht vergesse
 
 Wenn du jedoch am Frontend was geändert hast, musst du vor jeder Ausführung einen extra Schritt erledigen. In Visual Studio oder in CMD musst du dich ins Verzeichnis "C:\HTL Desk Projekt\htldesk\htldesk\htldesk.Client" navigieren und dort "npm run build" ausführen. Jetzt sollte alles funktionieren.
 
-PS: Stand 20.12.2022 16:13: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.
+PS: Stand 26.12.2022 02:58: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.
