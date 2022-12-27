@@ -27,7 +27,6 @@ namespace htldesk.Application.Model
         public Guid Guid { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }
-        public List<AccountingAccount> FileContent { get; private set; } = new();
         
         public Guid UserGuid { get; private set; }
 
