@@ -4,14 +4,34 @@
       <HelloWorld msg="You did it!" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/register"><Button>Register</Button> </RouterLink>
+        <div><RouterLink to="/">Home</RouterLink></div>
+        <div><RouterLink to="/about">About</RouterLink></div>
+        <div v-if="!authenticated">
+          <RouterLink to="/login">Login</RouterLink>
+        </div>
+        <div v-if="authenticated">
+          <RouterLink to="/login">Profil</RouterLink>
+        </div>
+        <div v-if="!authenticated">
+          <RouterLink to="/register"><Button>Register</Button></RouterLink>
+        </div>
+        <div v-if="authenticated">
+          <RouterLink to="/dashboard">Dashboard</RouterLink> 
+        </div>
       </nav>
     </div>
   </header>
   <RouterView />
 </template>
+
+<script>
+export default {
+  computed: {
+    authenticated() { return this.$store.state.user.isLoggedIn; }
+
+  }
+}
+</script>
 
 <style>
 html,

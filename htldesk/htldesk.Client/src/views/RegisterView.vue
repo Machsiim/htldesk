@@ -44,35 +44,36 @@ if(username.value.length < 3) {
   username.classList.add('error-border');
   errorFlag = true;
   
-}
-if(!emailIsValid(email.value)) {
-  errorNodes[1].innerText = 'Email is not valid';
-  email.classList.add('error-border');
-  errorFlag = true;
-}
-if(password.value.length < 8) {
-  errorNodes[2].innerText = 'Password must be at least 8 characters long';
-  password.classList.add('error-border');
-  errorFlag = true;
-}
-return !errorFlag;
-}
-function clearErrors() {
-const errorNodes = document.querySelectorAll('.error');
-errorNodes.forEach(node => node.innerText = '');
-errorNodes.forEach(node => node.classList.remove('error-border'));
-}
-function emailIsValid (email) {
-return /\S+@\S+\.\S+/.test(email);
-}
-import axios from 'axios';
-export default {
-data() {
-  return {
-    form: {
-      username: '',
-      email: '',
-      password:''
+  <script>
+  export default {
+    data() {
+      return {
+        email: '',
+        username: '',
+        password: '',
+        passwordConfirmation: ''
+      }
+    },
+    methods: {
+      async register() {
+        if (this.password !== this.passwordConfirmation) {
+          this.errorMessage = 'Passwords do not match'
+          return
+        }
+        try {
+          await axios.post('https://localhost:5001/api/users/register', {
+            email: this.email,
+            username: this.username,
+            password: this.password
+            
+          })
+          this.$router.push('/login')
+        } catch (error) {
+          console.error(error)
+          // Display an error message to the user
+          this.errorMessage = 'Error creating user'
+        }
+      }
     }
   }
 },

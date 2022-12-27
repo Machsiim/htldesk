@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace htldesk.Webapi.Controllers
 {
-    [ApiController]               // Muss bei jedem Controller stehen
+    [ApiController]        // Muss bei jedem Controller stehen
     [Route("/api/users")]  // Muss bei jedem Controller stehen
     public class UserController : ControllerBase
     {
@@ -22,10 +22,11 @@ namespace htldesk.Webapi.Controllers
         private readonly IMapper _mapper;
         private readonly HtldeskContext _db;
 
-        public UserController(HtldeskContext db, IMapper mapper)
+        public UserController(HtldeskContext db, IMapper mapper, IConfiguration config)
         {
             _db = db;
             _mapper = mapper;
+            _config = config;
         }
 
 
@@ -40,19 +41,20 @@ namespace htldesk.Webapi.Controllers
         {
             var user = _db.Users.FirstOrDefault(u => u.Username == username);
             if (user is null) return BadRequest();
-            return Ok("E-Mail vom " + user.Username + ": " + user.Email);
+            return Ok(user);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult RegisterUser(UserDto userDto)
         {
-            var user = _mapper.Map<User>(userDto,
-            opt => opt.AfterMap((dto, entity) =>
-            { }));
+            Console.WriteLine("register drinnen");
+            var user = new User(userDto.Username, userDto.Email, userDto.Password);
+            var user2 = _db.Users.FirstOrDefault(u => u.Username == user.Username);
+            if (user2 is not null) return BadRequest();
             _db.Users.Add(user);
             try { _db.SaveChanges(); }
             catch (DbUpdateException) { return BadRequest(); } // DB constraint violations, ...
-            return Ok(_mapper.Map<User, UserDto>(user));
+            return Ok(user);
         }
 
         [HttpPost("login")]
@@ -111,7 +113,7 @@ namespace htldesk.Webapi.Controllers
             var username = HttpContext?.User.Identity?.Name;
             if (username is null) { return Unauthorized(); }
 
-            // Valid token, but no user match in the database (maybe deleted by an admin).
+            // Valid token, but no user match in the database (maybe deleted by an admin
             var user = _db.Users.FirstOrDefault(a => a.Username == username);
             if (user is null) { return Unauthorized(); }
             return Ok(new

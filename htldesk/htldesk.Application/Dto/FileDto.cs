@@ -11,7 +11,7 @@ namespace htldesk.Application.Dto
     public record FileDto(
         Guid Guid,
 
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Die Länge des Namens ist ungültig.")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "Die Länge des Namens ist ungültig.")]
         string Name,
 
         Guid UserGuid)
@@ -22,7 +22,7 @@ namespace htldesk.Application.Dto
             var db = validationContext.GetRequiredService<HtldeskContext>();
             if (db.Files.Any(f => f.UserGuid == this.UserGuid && f.Name == Name))
             {
-                yield return new ValidationResult("File already exists.", new[] { nameof(Name) });
+                yield return new ValidationResult("Filename already used.", new[] { nameof(Name) });
             }
         }
 
