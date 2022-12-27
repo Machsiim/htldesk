@@ -3,14 +3,20 @@ import File from './File.vue';
 </script>
 
 <template>
-    <h1>{{ FileName }}</h1>
+    <div class="files center">
+        <div class="fileName">{{ FileName1 }}</div>
+        <div class="fileName">{{ FileName2 }}</div>
+        <div class="fileName">{{ FileName3 }}</div>
+    </div>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            FileName: 'Hier sollte was sein'
+            FileName1: 'Hier sollte was sein',
+            FileName2: 'Hier sollte was sein',
+            FileName3: 'Hier sollte was sein'
         };
     },
     computed: {
@@ -24,9 +30,13 @@ export default {
             if (!res.ok) {
                 alert('Problem beim Laden der Daten.');
             }
-            FileName = res.json().then((data) => {
-                this.FileName = data;
+
+            res.json().then((data) => {
+                this.FileName1 = data[0].name;
+                this.FileName2 = data[1].name;
+                this.FileName3 = data[2].name;
             })
+
         } catch (e) {
             alert('Der Server ist nicht erreichbar.');
         }
@@ -45,4 +55,16 @@ export default {
     flex-wrap: wrap;
     gap: 13rem;
 }
+
+.files {
+    display: flex;
+    gap: 13rem;
+}
+
+.fileName {
+    font-size: 2em;
+    text-align: center;
+}
+
+
 </style>

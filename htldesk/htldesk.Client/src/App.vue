@@ -9,8 +9,15 @@
       <nav>
         <div><RouterLink to="/">Home</RouterLink></div>
         <div><RouterLink to="/about">About</RouterLink></div>
-        <div><RouterLink to="/login">Login</RouterLink></div>
-        <div><RouterLink to="/register">Register</RouterLink></div>
+        <div v-if="!authenticated">
+          <RouterLink to="/login">Login</RouterLink>
+        </div>
+        <div v-if="authenticated">
+          <RouterLink to="/login">Profil</RouterLink>
+        </div>
+        <div v-if="!authenticated">
+          <RouterLink to="/register">Register</RouterLink>
+        </div>
         <div v-if="authenticated">
           <RouterLink to="/dashboard">Dashboard</RouterLink> 
         </div>

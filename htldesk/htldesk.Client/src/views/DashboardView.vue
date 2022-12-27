@@ -7,7 +7,8 @@ import FilePanel from '../components/FilePanel.vue';
 <template>
     <div>
         <div class="welcome">Willkommen, {{ username }}</div>
-      <FilePanel>Ich bin ein FilePanel</FilePanel>
+        <div class="filesText">Welches File wollen Sie heute bearbeiten? (Kann wer bitte die Files centern danke)</div>
+      <FilePanel></FilePanel>
   </div>
 </template>
 
@@ -34,6 +35,13 @@ import FilePanel from '../components/FilePanel.vue';
     .welcome {
         font-size: 2em;
         margin-top: 8%;
+        text-align: center;
+    }
+
+    .filesText {
+        font-size: 1.5em;
+        margin-top: 8%;
+        margin-bottom: 1.5%;
         text-align: center;
     }
 </style>

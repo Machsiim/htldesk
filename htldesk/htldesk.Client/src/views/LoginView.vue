@@ -36,6 +36,7 @@ export default {
                 const userdata = (await axios.post('users/login', this.model)).data;
                 axios.defaults.headers.common['Authorization'] = `Bearer ${userdata.token}`;
                 this.$store.commit('authenticate', userdata);
+                this.$router.push('/dashboard')
             } catch (e) {
                 if (e.response.status == 401) {
                     alert('Login failed. Invalid credentials.');
