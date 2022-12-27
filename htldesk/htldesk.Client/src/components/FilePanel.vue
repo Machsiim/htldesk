@@ -3,6 +3,7 @@ import File from './File.vue';
 </script>
 
 <template>
+    
     <div class="files center">
         <div class="fileName">{{ FileName1 }}</div>
         <div class="fileName">{{ FileName2 }}</div>
@@ -59,6 +60,8 @@ export default {
 .files {
     display: flex;
     gap: 13rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .fileName {

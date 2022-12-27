@@ -7,8 +7,8 @@ import FilePanel from '../components/FilePanel.vue';
 <template>
     <div>
         <div class="welcome">Willkommen, {{ username }}</div>
-        <div class="filesText">Welches File wollen Sie heute bearbeiten? (Kann wer bitte die Files centern danke)</div>
-      <FilePanel></FilePanel>
+        <div class="filesText">Welches File wollen Sie heute bearbeiten?</div>
+     	<FilePanel></FilePanel>
   </div>
 </template>
 
