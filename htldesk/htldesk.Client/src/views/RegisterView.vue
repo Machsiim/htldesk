@@ -30,30 +30,32 @@
 
 <script>
 function validateForm() {
-const username = document.getElementById('username');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
+this.username = document.getElementById('username');
+this.email = document.getElementById('email');
+this.password = document.getElementById('password');
 const errorNodes = document.querySelectorAll('.error');
 const success = document.getElementById('success');
 clearErrors();
+}
 
 
 let errorFlag = false;
-if(username.value.length < 3) {
+if(this.username.length < 3) {
   errorNodes[0].innerText = 'Username must be at least 3 characters long';
-  username.classList.add('error-border');
+  this.username.classList.add('error-border');
   errorFlag = true;
-  
-  <script>
-  export default {
-    data() {
-      return {
+}
+
+export default {
+  data() {
+    return {
         email: '',
         username: '',
         password: '',
         passwordConfirmation: ''
-      }
+      };
     },
+
     methods: {
       async register() {
         if (this.password !== this.passwordConfirmation) {
@@ -74,9 +76,8 @@ if(username.value.length < 3) {
           this.errorMessage = 'Error creating user'
         }
       }
-    }
-  }
-},
+    },
+    
 methods: {
   onSubmit(event) {
     event.preventDefault();
@@ -93,13 +94,15 @@ methods: {
 
     })
     .catch(error => {
-      console.log(error);
-    });
+        console.log(error);
+      });
+      }
+    }
   }
-}
-}
 };
+
 </script>
+
 <style>
 .error {
   color: red !important;
