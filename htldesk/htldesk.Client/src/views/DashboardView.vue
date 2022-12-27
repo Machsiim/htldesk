@@ -32,7 +32,7 @@ import FilePanel from '../components/FilePanel.vue';
 </script>
 
 <style>
-    .welcome {
+        .welcome {
         font-size: 2em;
         margin-top: 8%;
         text-align: center;
