@@ -3,6 +3,8 @@ using htldesk.Application;
 using htldesk.Application.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using htldesk.Application.Model;
+using File = htldesk.Application.Model.File;
 
 namespace htldesk.Webapi.Controllers
 {
@@ -26,7 +28,28 @@ namespace htldesk.Webapi.Controllers
         {
             var user = _db.Users.FirstOrDefault(u => u.Username == username);
             if (user is null) return BadRequest();
-            var files = _db.Files.Where(f => f.UserGuid == user.Guid).ToList();
+            List<File> files = new();
+            int count = 0;
+            foreach(File file in _db.Files)
+            {
+                if (file.UserGuid == user.Guid)
+                {
+                    files.Add(file);
+                    count++;
+                }
+            }
+
+            if (count != 3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    File file = new File("Neue Datei", user.Guid);
+                    _db.Files.Add(file);
+                    _db.SaveChanges();
+                    files.Add(file);
+                }
+            }
+            
             return Ok(files);
         }
 
