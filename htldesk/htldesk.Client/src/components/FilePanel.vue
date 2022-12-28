@@ -36,7 +36,7 @@ export default {
             res.json().then((data) => {
                 this.FileName1 = data[0].name;
                 this.FileName2 = data[1].name;
-                this.FileName3 = data[2].name;
+                this.FileName3 = "LenzFile";
             })
 
         } catch (e) {

@@ -1,14 +1,14 @@
 <script>
 export default {
     props: {
-        name: String,
+        name: String
     }
 };
 </script>
 
 <template>
     <div class="imageContainer">
-        <div class="overlayText">{{ name }}</div>
+        <div>{{ name }}</div>
     </div>
 </template>
 
