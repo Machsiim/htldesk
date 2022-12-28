@@ -3,11 +3,10 @@ import File from './File.vue';
 </script>
 
 <template>
-    
-    <div class="files center">
-        <div class="fileName">{{ FileName1 }}</div>
-        <div class="fileName">{{ FileName2 }}</div>
-        <div class="fileName">{{ FileName3 }}</div>
+    <div class="files">
+        <div class="fileName"><a :href="'/files' + '/' + Username + '/' + FileName1">{{ FileName1 }}</a></div>
+        <div class="fileName"><a :href="'/files' + '/' + Username + '/' + FileName2">{{ FileName2 }}</a></div>
+        <div class="fileName"><a :href="'/files' + '/' + Username + '/' + FileName3">{{ FileName3 }}</a></div>
     </div>
 </template>
 
@@ -15,9 +14,11 @@ import File from './File.vue';
 export default {
     data() {
         return {
+            Username: this.$store.state.user.username,
+
             FileName1: 'Hier sollte was sein',
             FileName2: 'Hier sollte was sein',
-            FileName3: 'Hier sollte was sein'
+            FileName3: 'Hier sollte was sein',
         };
     },
     computed: {
@@ -35,7 +36,7 @@ export default {
             res.json().then((data) => {
                 this.FileName1 = data[0].name;
                 this.FileName2 = data[1].name;
-                this.FileName3 = data[2].name;
+                this.FileName3 = "LenzFile";
             })
 
         } catch (e) {
