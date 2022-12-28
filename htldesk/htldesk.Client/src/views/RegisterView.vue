@@ -1,22 +1,21 @@
-
 <template>
   <div class="register">
     <h1 id="reg_form">Registration Form</h1>
     <form @submit.prevent="onSubmit">
   <label for="username">Username:</label>
-  <input v-model="form.username" type="text" id="username" name="username" required>
+  <input type="text" id="username" name="username" required>
   <br>
   
   <small class="error"></small>
   <hr>
   <label for="email">Email:</label>
-  <input v-model="form.email" type="text" id="email" name="email" required>
+  <input type="text" id="email" name="email" required>
   <br>
   
   <small class="error"></small>
   <hr>
   <label for="password">Password:</label>
-  <input v-model="form.password" type="password" id="password" name="password" required>
+  <input type="password" id="password" name="password" required>
   <br>
   
   <small class="error"></small>
@@ -30,20 +29,21 @@
 
 <script>
 function validateForm() {
-this.username = document.getElementById('username');
-this.email = document.getElementById('email');
-this.password = document.getElementById('password');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
 const errorNodes = document.querySelectorAll('.error');
 const success = document.getElementById('success');
 clearErrors();
-}
+
 
 
 let errorFlag = false;
-if(this.username.length < 3) {
+if(username.length < 3) {
   errorNodes[0].innerText = 'Username must be at least 3 characters long';
-  this.username.classList.add('error-border');
+  username.classList.add('error-border');
   errorFlag = true;
+}
 }
 
 export default {
