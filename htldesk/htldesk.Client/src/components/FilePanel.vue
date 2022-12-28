@@ -16,9 +16,9 @@ export default {
         return {
             Username: this.$store.state.user.username,
 
-            FileName1: 'Hier sollte was sein',
-            FileName2: 'Hier sollte was sein',
-            FileName3: 'Hier sollte was sein',
+            FileName1: '',
+            FileName2: '',
+            FileName3: '',
         };
     },
     computed: {
@@ -36,7 +36,7 @@ export default {
             res.json().then((data) => {
                 this.FileName1 = data[0].name;
                 this.FileName2 = data[1].name;
-                this.FileName3 = "LenzFile";
+                this.FileName3 = data[2].name;
             })
 
         } catch (e) {

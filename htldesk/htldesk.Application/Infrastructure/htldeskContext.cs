@@ -64,7 +64,7 @@ public class HtldeskContext : DbContext
         Users.AddRange(users);
         SaveChanges();
 
-        
+
         // Files
         var files = new Faker<File>("de").CustomInstantiator(f =>
         {
@@ -76,7 +76,18 @@ public class HtldeskContext : DbContext
         })
         .Generate(30)
         .ToList();
+
+        List<File> LenzFiles = new List<File>();
+        File file1 = new File("LenzFile1", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+        File file2 = new File("LenzFile2", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+        File file3 = new File("LenzFile3", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+        LenzFiles.Add(file1);
+        LenzFiles.Add(file2);
+        LenzFiles.Add(file3);
+
+
         Files.AddRange(files);
+        Files.AddRange(LenzFiles);
         SaveChanges();
 
         // AccountingAccount
@@ -101,7 +112,7 @@ public class HtldeskContext : DbContext
                 haben: f.Random.Int(0, 1000),
                 soll: f.Random.Int(0, 1000),
                 datum: f.Date.Past())
-            { Guid = f.Random.Guid()};
+            { Guid = f.Random.Guid() };
         }).Generate(30).ToList();
         Entries.AddRange(entries);
         SaveChanges();
