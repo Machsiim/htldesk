@@ -2,23 +2,27 @@
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <br />
 
       <nav>
-        <div><RouterLink to="/">Home</RouterLink></div>
-        <div><RouterLink to="/about">About</RouterLink></div>
+        <div><RouterLink to="/" class="nav-link">Home</RouterLink></div>
+        <div><RouterLink to="/about" class="nav-link">About</RouterLink></div>
         <div v-if="!authenticated">
-          <RouterLink to="/login">Login</RouterLink>
+          <RouterLink to="/login" class="nav-link">Login</RouterLink>
         </div>
         <div v-if="authenticated">
-          <RouterLink to="/login">Profil</RouterLink>
+          <RouterLink to="/login" class="nav-link">Profil</RouterLink>
         </div>
         <div v-if="!authenticated">
-          <RouterLink to="/register"><Button>Register</Button></RouterLink>
+          <RouterLink to="/register" class="nav-link"
+            ><Button id="register_button">Register</Button></RouterLink
+          >
         </div>
         <div v-if="authenticated">
-          <RouterLink to="/dashboard">Dashboard</RouterLink> 
+          <RouterLink to="/dashboard">Dashboard</RouterLink>
         </div>
       </nav>
+      <br />
     </div>
   </header>
   <RouterView />
@@ -27,10 +31,11 @@
 <script>
 export default {
   computed: {
-    authenticated() { return this.$store.state.user.isLoggedIn; }
-
-  }
-}
+    authenticated() {
+      return this.$store.state.user.isLoggedIn;
+    },
+  },
+};
 </script>
 
 <style>
@@ -39,8 +44,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: beige;
+  background-color: #1f6032 !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white !important;
 }
 #appContainer {
   margin-left: 1em;
@@ -117,5 +123,42 @@ input[type="submit"]:hover {
 }
 .error {
   color: red !important;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav div {
+  margin: 0 10px;
+}
+
+nav .nav-link,
+nav #register_button {
+  color: white;
+  text-decoration: none;
+  font-size: 23px !important;
+  transition: all ease 0.3s;
+}
+
+nav a:hover {
+  color: #0088a9;
+}
+.nav-link:hover {
+  color: #0088a9 !important;
+}
+
+#register_button {
+  background-color: #0088a9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#register_button:hover {
+  background-color: #00738a;
 }
 </style>

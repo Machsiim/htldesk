@@ -1,4 +1,3 @@
-´´´
 <template>
   <link
     rel="stylesheet"
@@ -7,7 +6,7 @@
 
   <div class="register">
     <h1 id="reg_form">Registration Form</h1>
-    <form>
+    <form v-on:submit.prevent="register">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" />
       <br />
@@ -22,19 +21,34 @@
       <hr />
       <label for="password">Password:</label>
       <div id="password-container">
-        <input type="password" id="password" name="password" />
-        <i class="fa fa-eye eye-icon" id="eye_icon"></i>
+        <input type="password" id="password" ref="password" name="password" />
+        <i
+          class="fa fa-eye eye-icon"
+          id="eye_icon"
+          ref="eye_icon"
+          v-on:click="
+            togglePasswordVisibility(this.$refs.password, this.$refs.eye_icon)
+          "
+        ></i>
       </div>
       <br />
 
       <small class="error"></small>
       <hr />
       <label for="password2">Confirm Password:</label>
-      <input type="password" id="password2" name="password2" />
+      <input type="password" id="password2" ref="password2" name="password2" />
+      <i
+        class="fa fa-eye eye-icon"
+        id="eye_icon2"
+        ref="eye_icon2"
+        v-on:click="
+          togglePasswordVisibility(this.$refs.password2, this.$refs.eye_icon2)
+        "
+      ></i>
       <br />
       <small class="error"></small>
       <hr />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" v-on:click="register" />
 
       <p id="success"></p>
     </form>
@@ -43,6 +57,7 @@
 
 <script>
 import axios from "axios";
+
 function validateForm() {
   const username = document.getElementById("username");
   const email = document.getElementById("email");
@@ -52,25 +67,6 @@ function validateForm() {
   const success = document.getElementById("success");
 
   const eyeIcon = document.querySelector("#eye_icon");
-
-  // Then, create a function to toggle the visibility of the password
-  function togglePasswordVisibility() {
-    // Get the password input field
-    const password = document.querySelector("#password");
-
-    // Check if the password field is currently set to "password" type
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    // toggle the eye slash icon
-    this.classList.toggle("fa-eye-slash");
-  }
-
-  // Add an event listener to the eye icon to toggle the password visibility when clicked
-  eyeIcon.addEventListener("click", (e) => togglePasswordVisibility());
-
-  // Finally, append the eye icon to the page, next to the password input field
-  const passwordInputContainer = document.querySelector("#password-container");
 
   clearErrors();
 
@@ -140,6 +136,68 @@ export default {
         this.errorMessage = "Error creating user";
       }
     },
+    togglePasswordVisibility: function () {
+      // Get the password input field
+      const password = arguments[0];
+      const eyeIcon = arguments[1];
+      // console.log(password);
+
+      // Check if the password field is currently set to "password" type
+      const type =
+        password.getAttribute("type") === "password" ? "text" : "password";
+      password.setAttribute("type", type);
+      // toggle the eye slash icon
+      eyeIcon.classList.toggle("fa-eye-slash");
+    },
+    validateForm() {
+      const username = document.getElementById("username");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const password2 = document.getElementById("password2");
+      const errorNodes = document.querySelectorAll(".error");
+      const success = document.getElementById("success");
+
+      const eyeIcon = document.querySelector("#eye_icon");
+
+      clearErrors();
+
+      let errorFlag = false;
+      if (username.value.length < 3) {
+        errorNodes[0].innerText = "Username must be at least 3 characters long";
+        username.classList.add("error-border");
+        errorFlag = true;
+      }
+      if (!testEmail(email.value)) {
+        errorNodes[1].innerText = "Email is not valid";
+        email.classList.add("error-border");
+        errorFlag = true;
+      }
+      if (password.value.length < 4) {
+        errorNodes[2].innerText = "Password must be at least 4 characters long";
+        password.classList.add("error-border");
+        errorFlag = true;
+      }
+      if (password2.value !== password.value) {
+        errorNodes[3].innerText = "Passwords do not match";
+        password2.classList.add("error-border");
+        errorFlag = true;
+      }
+
+      function testEmail(email) {
+        const regex = /\S+@\S+\.\S+/;
+        return regex.test(email);
+      }
+
+      function clearErrors() {
+        errorNodes.forEach((node) => {
+          node.innerText = "";
+        });
+        document.querySelectorAll(".error-border").forEach((node) => {
+          node.classList.remove("error-border");
+        });
+      }
+      return !errorFlag;
+    },
   },
 };
 </script>
@@ -158,4 +216,3 @@ i.fa-eye {
   margin-left: -30px;
 }
 </style>
-```

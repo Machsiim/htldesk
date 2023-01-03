@@ -1,14 +1,16 @@
-import { createApp } from 'vue'
-import axios from "axios";  
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from "vue";
+import axios from "axios";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? "/api" : "https://localhost:5001/api";
+axios.defaults.baseURL =
+  process.env.NODE_ENV == "production" ? "/api" : "https://localhost:5001/api";
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(router)
-app.use(store)
+app.use(router);
+app.use(store);
 
-app.mount('#app')
+app.mount("#app");
