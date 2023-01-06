@@ -124,11 +124,14 @@ export default {
         return;
       }
       try {
-        await axios.post("https://localhost:5001/api/users/register", {
-          email: this.email,
-          username: this.username,
-          password: this.password,
-        });
+        const userdata = (
+          await axios.post("users/register", {
+            email: this.email,
+            username: this.username,
+            password: this.password,
+          })
+        ).data;
+        console.log(userdata);
         this.$router.push("/login");
       } catch (error) {
         console.error(error);
