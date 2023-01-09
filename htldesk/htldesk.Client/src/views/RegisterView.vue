@@ -124,11 +124,12 @@ export default {
         return;
       }
       try {
+        console.log(document.getElementById("email").value);
         const userdata = (
           await axios.post("users/register", {
-            email: this.email,
-            username: this.username,
-            password: this.password,
+            email: document.getElementById("email").value,
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
           })
         ).data;
         console.log(userdata);
