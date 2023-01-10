@@ -79,9 +79,14 @@ public class HtldeskContext : DbContext
 
         // Lenz Files
         List<File> LenzFiles = new List<File>();
-        File file1 = new File("LenzFile1", Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"));
-        File file2 = new File("LenzFile2", Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"));
-        File file3 = new File("LenzFile3", Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"));
+        File file1 = new File("LenzFile1", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+        File file2 = new File("LenzFile2", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+        File file3 = new File("LenzFile3", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+
+        file1.Guid = Guid.Parse("08daf345-92a9-4401-8e0d-da6705623951");
+        file2.Guid = Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f");
+        file3.Guid = Guid.Parse("08daf345-92a9-4ac1-845e-43b54ed66c3c");
+
         LenzFiles.Add(file1);
         LenzFiles.Add(file2);
         LenzFiles.Add(file3);
