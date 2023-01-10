@@ -1,11 +1,19 @@
 WICHTIG!!!
+
 Unser Testcase ist Lenz.
 Alle AccountingAccounts und Entries sind gehardcodet für Lenz. Eigene Accounts werden noch nicht funktionieren.
+
 Folgendes wird zum Testen zu verwenden:
+
 User: Lenz, 1111
+
 File Guid: 08daf345-92a9-4ab8-83e6-db48f1a98c9f (Nur dieses File ist befüllt)
+
 AccountingAccounts: 08daf341-a2c3-4020-8154-4a29c41300b7 , 08daf341-a2c3-4020-8154-4a29c41300b8 , 08daf341-a2c3-4020-8154-4a29c41300b9
+
 Entries haben immer verschiedene Guids, sollte aber irrelevant sein.
+
+
 
 "# htldesk"
 
