@@ -12,8 +12,7 @@ namespace htldesk.Application.Dto
         Guid GegenKonto,
         decimal Haben,
         decimal Soll,
-        DateTime Datum,
-        string Name)
+        DateTime Datum)
     {
         // Validation Result
     }

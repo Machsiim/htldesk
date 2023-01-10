@@ -5,10 +5,10 @@ import File from '../components/File.vue'
 returnFilename
 
 <template>
-    <br>
-    <br>
-    <br>
     <div>
+        <br>
+        <br>
+        <br>
         <File v-bind:name=$route.params.filename ></File>
     </div>
 </template>
