@@ -8,7 +8,7 @@ export default {
 
 <template>
     <div class="imageContainer">
-        <div>{{ name }}</div>
+        <div>{{ this.$store.state.file.guid }}</div>
     </div>
 </template>
 

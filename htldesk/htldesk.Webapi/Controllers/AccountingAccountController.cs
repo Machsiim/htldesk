@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using htldesk.Application.Dto;
+using htldesk.Application.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,18 @@ namespace htldesk.Webapi.Controllers
             if (file is null) return BadRequest();
             var accountingAccounts = _db.AccountingAccounts.Where(a => a.FileGuid == file.Guid).ToList();
             return Ok(accountingAccounts);
+        }
+
+        [HttpGet("count/{fileGuid:Guid}")]
+        public IActionResult CountAccountingAccounts(Guid fileGuid)
+        {
+            int count = 0;
+            var file = _db.Files.FirstOrDefault(f => f.Guid == fileGuid);
+            if (file is null) return BadRequest();
+            foreach(Application.Model.File f in _db.Files) {
+                if (f.Guid == file.Guid) count++; 
+            }
+            return Ok(count);
         }
 
         [HttpPost("create")]
