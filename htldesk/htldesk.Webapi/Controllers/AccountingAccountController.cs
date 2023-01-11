@@ -38,9 +38,6 @@ namespace htldesk.Webapi.Controllers
             foreach (AccountingAccount a in _db.AccountingAccounts)
             {
                 if (a.FileGuid == file.Guid) count++;
-                Console.WriteLine(a.Guid);
-                Console.WriteLine(fileGuid);
-                Console.WriteLine(count);
             }
             return Ok(count);
         }
