@@ -1,8 +1,8 @@
 <script setup>
+import AccountingAccount from '../components/AccountingAccount.vue';
 import File from '../components/File.vue'
 </script>
 
-returnFilename
 
 <template>
     <div>
@@ -10,6 +10,7 @@ returnFilename
         <br>
         <br>
         <File v-bind:name=$route.params.filename ></File>
+        <AccountingAccount v-bind:name="123"></AccountingAccount>
     </div>
 </template>
 
@@ -22,9 +23,10 @@ export default {
     },
     methods: {
         returnFilename() {
-            console.log(this.$route.params.filename)
+            console.log(this.$route.params.filename);
             return this.$route.params.filename;
         }
-    }
+    },
+    components: { AccountingAccount }
 };
 </script>

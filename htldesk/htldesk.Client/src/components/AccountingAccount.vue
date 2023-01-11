@@ -1,31 +1,26 @@
 <script setup>
-import axios from 'axios';
+import axios from "axios";
 </script>
 
 <template>
-    
+    <div class="accounts">
+        <div>
+            {{ this.entrieCount }}
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
-    props: {
-        entrieCount: 0,
-        fileGuid: Number
+    data() {
+        return {
+            entrieCount: 0,
+        };
     },
-
-    methods: {
-        computed: {
-            async getEntries () {
-                axios.get('https://localhost:5001/api/accountingaccounts/' + this.$store.state.file.guid)
-                    .then(response => {
-                        this.entrieCount = response.data.length;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            },
-        }
-    }
-
-}
+    mounted: async function () {
+        this.entrieCount = (await axios.get("https://localhost:5001/api/accountingaccounts/count/" + this.$store.state.file.guid)).data;
+        console.log(this.$store.state.file.guid)
+        console.log(this.entrieCount);
+    },
+};
 </script>

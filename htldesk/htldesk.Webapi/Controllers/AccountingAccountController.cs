@@ -35,8 +35,12 @@ namespace htldesk.Webapi.Controllers
             int count = 0;
             var file = _db.Files.FirstOrDefault(f => f.Guid == fileGuid);
             if (file is null) return BadRequest();
-            foreach(Application.Model.File f in _db.Files) {
-                if (f.Guid == file.Guid) count++; 
+            foreach (AccountingAccount a in _db.AccountingAccounts)
+            {
+                if (a.FileGuid == file.Guid) count++;
+                Console.WriteLine(a.Guid);
+                Console.WriteLine(fileGuid);
+                Console.WriteLine(count);
             }
             return Ok(count);
         }
