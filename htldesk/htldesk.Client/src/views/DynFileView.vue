@@ -9,8 +9,11 @@ import File from '../components/File.vue'
         <br>
         <br>
         <br>
-        <File v-bind:name=$route.params.filename ></File>
-        <AccountingAccount v-bind:name="123"></AccountingAccount>
+        <File v-bind:name=$route.params.filename></File>
+        <div v-for="a in accounts" v-bind:key="a.guid">
+            <AccountingAccount v-bind:guid="a.guid"></AccountingAccount> <!--add v-bind:guid="xxx" later-->
+        </div>
+
     </div>
 </template>
 
@@ -18,7 +21,8 @@ import File from '../components/File.vue'
 export default {
     data() {
         return {
-            fileName: this.$route.params.filename
+            fileName: this.$route.params.filename,
+            accounts: [],
         };
     },
     methods: {
@@ -27,6 +31,23 @@ export default {
             return this.$route.params.filename;
         }
     },
+    mounted: async function () {
+        try {
+            const res = await fetch('https://localhost:5001/api/accountingaccounts/' + this.$store.state.file.guid);
+            if (!res.ok) {
+                alert('Problem beim Laden der Daten.');
+            }
+
+            res.json().then((data) => {
+                this.accounts = data;
+                console.log(this.accounts);
+            })
+
+        } catch (e) {
+            alert('Der Server ist nicht erreichbar.');
+        }
+    },
+
     components: { AccountingAccount }
 };
 </script>
