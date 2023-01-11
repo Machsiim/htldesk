@@ -111,9 +111,9 @@ public class HtldeskContext : DbContext
 
         // Lenz AccountingAccounts
         List<AccountingAccount> LenzAccountingAccounts = new List<AccountingAccount>();
-        AccountingAccount account1 = new AccountingAccount("LenzAccount1", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
-        AccountingAccount account2 = new AccountingAccount("LenzAccount2", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
-        AccountingAccount account3 = new AccountingAccount("LenzAccount3", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
+        AccountingAccount account1 = new AccountingAccount("LenzAccount1", Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f"));
+        AccountingAccount account2 = new AccountingAccount("LenzAccount2", Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f"));
+        AccountingAccount account3 = new AccountingAccount("LenzAccount3", Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f"));
 
         account1.Guid = Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7");
         account2.Guid = Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b8");

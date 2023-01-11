@@ -16,7 +16,7 @@ export default {
     methods: {
         computed: {
             async getEntries () {
-                axios.get('https://localhost:5001/api/entries/' + this.fileGuid)
+                axios.get('https://localhost:5001/api/accountingaccounts/' + this.$store.state.file.guid)
                     .then(response => {
                         this.entrieCount = response.data.length;
                     })
