@@ -2,7 +2,6 @@
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      <br />
 
       <nav>
         <div><RouterLink to="/" class="nav-link">Home</RouterLink></div>

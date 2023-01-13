@@ -6,7 +6,7 @@ import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 axios.defaults.baseURL =
-  process.env.NODE_ENV == "production" ? "/api" : "https://localhost:5001/api";
+process.env.NODE_ENV == "production" ? "/api" : "https://localhost:5001/api";
 
 const app = createApp(App);
 

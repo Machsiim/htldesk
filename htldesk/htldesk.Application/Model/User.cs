@@ -16,9 +16,9 @@ namespace htldesk.Application.Model
 
     public class User
     {
-        #pragma warning disable CS8618
+#pragma warning disable CS8618
         protected User() { }
-        #pragma warning restore CS8618
+#pragma warning restore CS8618
 
         public User(string name, string email, string password)
         {
@@ -29,7 +29,7 @@ namespace htldesk.Application.Model
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public Guid Guid { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }

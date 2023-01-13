@@ -41,6 +41,7 @@ namespace htldesk.Webapi.Controllers
         {
             var user = _db.Users.FirstOrDefault(u => u.Username == username);
             if (user is null) return BadRequest();
+            user.Id = 0;
             return Ok(user);
         }
 
@@ -54,6 +55,7 @@ namespace htldesk.Webapi.Controllers
             _db.Users.Add(user);
             try { _db.SaveChanges(); }
             catch (DbUpdateException) { return BadRequest(); } // DB constraint violations, ...
+            user.Id = 0;
             return Ok(user);
         }
 
