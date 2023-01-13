@@ -97,8 +97,6 @@ import FilePanel from "../components/FilePanel.vue";
 </template>
 
   <style>
-* {
-}
 h1 {
   color: white;
 }
