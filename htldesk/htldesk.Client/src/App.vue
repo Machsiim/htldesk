@@ -24,7 +24,14 @@
       <br />
     </div>
   </header>
+
   <RouterView />
+  <footer>
+    <div class="wrapper">
+      <p>Copyright © thomas Müller {{ currentYear }}</p>
+      <p>Powered by OpenAI</p>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -38,6 +45,20 @@ export default {
 </script>
 
 <style>
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Add this style to the parent element */
+#appContainer {
+  position: relative;
+}
 html,
 body {
   margin: 0;
