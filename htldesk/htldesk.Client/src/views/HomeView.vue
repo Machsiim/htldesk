@@ -64,35 +64,6 @@ import FilePanel from "../components/FilePanel.vue";
       </div>
     </div>
 
-    <section class="">
-      <footer class="text-center text-white" style="background-color: black">
-        <div class="container p-4 pb-0">
-          <section class="">
-            <p class="d-flex justify-content-center align-items-center">
-              <span class="me-3 mr-3">Registrieren Sie sich kostenlos! </span>
-              <button type="button" class="btn btn-outline-light btn-rounded">
-                Registrieren!
-              </button>
-            </p>
-          </section>
-          <section class="">
-            <p class="d-flex justify-content-center align-items-center">
-              <span class="me-3 mr-3">Melden Sie sich an </span>
-              <button type="button" class="btn btn-outline-light btn-rounded">
-                Anmelden!
-              </button>
-            </p>
-          </section>
-        </div>
-
-        <div class="text-center p-3" style="background-color: gray">
-          © 2023 Copyright:
-          <a class="text-white" href="https://mdbootstrap.com/"
-            >MDBootstrap.com</a
-          >
-        </div>
-      </footer>
-    </section>
   </main>
 </template>
 
@@ -156,11 +127,6 @@ body {
 .index-module--columnRoot--F186F {
   grid-column-start: auto;
 }
-
-
-
-
-
 
 </style>
 

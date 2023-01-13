@@ -5,7 +5,7 @@
       <div class="wrapper">
         <br />
 
-        <nav>
+        <nav class="d-flex">
           <div>
             <RouterLink to="/" class="nav-link">Home</RouterLink>
           </div>
@@ -49,11 +49,6 @@
           </p>
         </section>
       </div>
-
-      <div class="text-center p-3" style="background-color: gray">
-        © 2023 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-      </div>
     </footer>
   </div>
 </template>
@@ -70,7 +65,7 @@ export default {
 
 <style>
 footer {
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
   background-color: black;
@@ -100,10 +95,12 @@ body {
   margin-top: 1em;
   width: 100%;
   display: flex;
-  flex-direction: column;
+
 }
 
 #header {
+  display: flex;
+  align-items: center;
   flex: 0 0 4em;
 }
 
@@ -112,9 +109,7 @@ body {
 }
 
 nav {
-  display: flex;
-  align-items: center;
-  gap: 1em;
+  color: red;
 }
 
 nav h1 {
@@ -181,13 +176,8 @@ input[type="submit"]:hover {
 
 nav {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-nav div {
-  margin: 0 10px;
-}
 
 nav .nav-link,
 nav #register_button {
