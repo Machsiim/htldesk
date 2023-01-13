@@ -1,31 +1,150 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using htldesk.Application;
+using htldesk.Application.Dto;
+using htldesk.Application.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace htldesk.Webapi.Controllers
 {
-    [ApiController]               // Muss bei jedem Controller stehen
+    [ApiController]        // Muss bei jedem Controller stehen
     [Route("/api/users")]  // Muss bei jedem Controller stehen
-    public class userController : ControllerBase
+    public class UserController : ControllerBase
     {
 
-        private readonly HtldeskContext _context;
-        
-        public userController(HtldeskContext context)
+        public record CredentialsDto(string username, string password);
+
+        private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
+        private readonly HtldeskContext _db;
+
+        public UserController(HtldeskContext db, IMapper mapper, IConfiguration config)
         {
-            _context = context;
+            _db = db;
+            _mapper = mapper;
+            _config = config;
         }
 
-        // Reagiert auf GET /api/news
-        [HttpGet]
-        public IActionResult GetAllNews()
+
+        //[HttpGet]
+        //public IActionResult GetAllUsers()
+        //{
+        //    return Ok(new string[] { "News 1", "News 2" });
+        //}
+
+        [HttpGet("{username:alpha}")]
+        public IActionResult GetNewsDetail(string username)
         {
-            return Ok(new string[] { "News 1", "News 2" });
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+            if (user is null) return BadRequest();
+            user.Id = 0;
+            return Ok(user);
         }
-        // Reagiert z. B. auf /api/news/14
-        [HttpGet("{id:int}")]
-        public IActionResult GetNewsDetail(int id)
+
+        [HttpPost("register")]
+        public IActionResult RegisterUser(UserDto userDto)
         {
-            if (id < 1000) { return NotFound(); }
-            return Ok($"News {id}");
+            Console.WriteLine("register drinnen");
+            var user = new User(userDto.Username, userDto.Email, userDto.Password);
+            var user2 = _db.Users.FirstOrDefault(u => u.Username == user.Username);
+            if (user2 is not null) return BadRequest();
+            _db.Users.Add(user);
+            try { _db.SaveChanges(); }
+            catch (DbUpdateException) { return BadRequest(); } // DB constraint violations, ...
+            user.Id = 0;
+            return Ok(user);
         }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] CredentialsDto credentials)
+        {
+            // Read the secret from appsettings.json via IConfiguration
+            // This is NOT the salt of the user password! It is the key to sign the JWT, so
+            // the client cannot manupulate our token.
+            var secret = Convert.FromBase64String(_config["Secret"]);
+            var lifetime = TimeSpan.FromHours(3);
+            // User exists in our database and the calculated hash matches
+            // the password hash in the database?
+            var user = _db.Users.FirstOrDefault(a => a.Username == credentials.username);
+            if (user is null) { return Unauthorized(); }
+            if (!user.CheckPassword(credentials.password)) { return Unauthorized(); }
+
+            string role = "Admin";  // TODO: Set your role based on your rules.
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                // Payload for our JWT.
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                // Write username to the claim (the "data zone" of the JWT).
+                new Claim(ClaimTypes.Name, user.Username.ToString()),
+                // Write the role to the claim (optional)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
+                }),
+                Expires = DateTime.UtcNow + lifetime,
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(secret),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            // Return the token so the client can save this to send a bearer token in the
+            // subsequent requests.
+            return Ok(new
+            {
+                user.Username,
+                UserGuid = user.Guid,
+                Role = role,
+                Token = tokenHandler.WriteToken(token)
+            });
+        }
+
+        /// <summary>
+        /// GET /api/user/me
+        /// Gets information about the current (authenticated) user.
+        /// </summary>
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult GetUserdata()
+        {
+            // No username is set in HttpContext? Should never occur because we added the
+            // Authorize annotation. But the properties are nullable, so we have to check.
+            var username = HttpContext?.User.Identity?.Name;
+            if (username is null) { return Unauthorized(); }
+
+            // Valid token, but no user match in the database (maybe deleted by an admin
+            var user = _db.Users.FirstOrDefault(a => a.Username == username);
+            if (user is null) { return Unauthorized(); }
+            return Ok(new
+            {
+                user.Username,
+                user.Email
+
+            });
+        }
+
+        /// <summary>
+        /// GET /api/user/all
+        /// List all users.
+        /// Only for users which has the role admin in the claim of the JWT.
+        /// </summary>
+        [Authorize(Roles = "Admin")]
+        [HttpGet("all")]
+        public IActionResult GetAllUsers()
+        {
+            var user = _db.Users
+                .Select(a => new
+                {
+                    a.Username,
+                    a.Email
+                })
+                .ToList();
+            if (user is null) { return BadRequest(); }
+            return Ok(user);
+        }
+
     }
 }

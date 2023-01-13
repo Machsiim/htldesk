@@ -1,33 +1,100 @@
+using AutoMapper;
+using htldesk.Application;
+using htldesk.Application.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using htldesk.Application.Model;
+using File = htldesk.Application.Model.File;
 
 namespace htldesk.Webapi.Controllers
 {
     [ApiController]               // Muss bei jedem Controller stehen
     [Route("/api/files")]  // Muss bei jedem Controller stehen
-    public class fileController : ControllerBase
+    public class FileController : ControllerBase
     {
-
+        
+        private readonly IConfiguration _config;
         private readonly HtldeskContext _db;
         
-        public fileController(HtldeskContext context)
+        public FileController(HtldeskContext context, IConfiguration config)
         {
             _db = context;
+            _config = config;
         }
 
-        // Reagiert auf GET /api/news
-        [HttpGet]
-        public IActionResult GetAllFiles()
+
+        [HttpGet("{username:alpha}")]
+        public IActionResult GetAllFiles(string username)
         {
-            var files = _db.Files.ToList();
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+            if (user is null) return BadRequest();
+            List<File> files = new();
+            int count = 0;
+            foreach(File file in _db.Files)
+            {
+                if (file.UserGuid == user.Guid)
+                {
+                    files.Add(file);
+                    count++;
+                }
+            }
+
+            if (count != 3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    File file = new File("Neue Datei", user.Guid);
+                    _db.Files.Add(file);
+                    _db.SaveChanges();
+                    files.Add(file);
+                }
+            }
+            
             return Ok(files);
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult GetFile(int id)
+        [HttpGet("{guid:Guid}")]
+        public IActionResult GetFile(Guid guid)
         {
-            var file = _db.Files.FirstOrDefault(f => f.Id == id);
+            var file = _db.Files.FirstOrDefault(f => f.Guid == guid);
             if (file is null) { return NotFound(); }
             return Ok(file);
         }
+
+        [HttpPost("upload")]
+        public IActionResult UploadFile(FileDto fileDto)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.Guid == fileDto.UserGuid);
+            if (user is null) return BadRequest();
+            var file = new Application.Model.File(fileDto.Name, fileDto.UserGuid);
+            _db.Files.Add(file);
+            try { _db.SaveChanges(); }
+            catch (DbUpdateException) { return BadRequest(); }
+            return Ok(file);
+        }
+
+
+        [HttpDelete("{guid:Guid}")]
+        public IActionResult DeleteFile(Guid guid)
+        {
+            var file = _db.Files.FirstOrDefault(f => f.Guid == guid);
+            if (file is null) { return NotFound(); }
+            _db.Files.Remove(file);
+            _db.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPut("{guid:Guid}")]
+        public IActionResult EditFile(Guid guid, FileDto fileDto)
+        {
+            var file = _db.Files.FirstOrDefault(f => f.Guid == guid);
+            if (file is null) { return NotFound(); }
+            file.Name = fileDto.Name;
+            _db.Files.Update(file);
+            _db.SaveChanges();
+            return Ok(file);
+        }
+
     }
+
 }

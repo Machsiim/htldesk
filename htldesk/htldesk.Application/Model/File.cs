@@ -11,11 +11,10 @@ namespace htldesk.Application.Model
     public class File
     {
 
-        public File(string name, string path, List<AccountingAccount> filecontent)
+        public File(string name, Guid userGuid)
         {
             Name = name;
-            Path = path;
-            FileContent = filecontent;
+            UserGuid = userGuid;
 
         }
         #pragma warning disable CS8618
@@ -28,10 +27,8 @@ namespace htldesk.Application.Model
         public Guid Guid { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }
-        public List<AccountingAccount> FileContent { get; private set; } = new();
-
-        [MaxLength(260)]
-        public string Path { get; set; }
+        
+        public Guid UserGuid { get; private set; }
 
     }
 }
