@@ -1,16 +1,14 @@
-# Projekt (Projektname)
+# Projekt HtlDesk
 
 Klone das Repository mit folgendem Befehl:
 
 ```
-git clone <URL des Repos>
+git clone https://github.com/Machsiim/htldesk
 ```
 
 ## Kurzbeschreibung
 
-Füge mit `![](filename.png)` ein Screenshot der App ein, die eine schöne Maske zeigt.
-
-Füge hier mit 1 Absatz eine kleine Beschreibung ein, was das Projekt macht.
+// TODO
 
 ## Teammitglieder
 
