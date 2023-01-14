@@ -22,7 +22,7 @@
             <RouterLink to="/register" class="nav-link"><Button id="register_button">Register</Button></RouterLink>
           </div>
           <div v-if="authenticated">
-            <RouterLink to="/dashboard">Dashboard</RouterLink>
+            <RouterLink to="/dashboard" class="nav-link">Dashboard</RouterLink>
           </div>
         </nav>
         <br />
