@@ -65,7 +65,7 @@ export default {
 
 <style>
 footer {
-  position: sticky;
+  position: absolute;
   bottom: 0;
   width: 100%;
   background-color: black;
