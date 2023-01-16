@@ -111,6 +111,7 @@ body {
   align-items: flex-start;
   padding: 20px;
   min-height: 250px;
+  color: black;
 }
 
 .card-body p {
