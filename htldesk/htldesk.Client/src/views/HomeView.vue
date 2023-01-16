@@ -129,9 +129,6 @@ body {
   grid-column-start: auto;
 }
 
-footer{
 
-
-}
 </style>
 
