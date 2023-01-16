@@ -1,28 +1,63 @@
-"# htldesk"
+# Projekt HtlDesk
 
-1) Wie starte ich das Projekt?
-Folgende Software wird benötigt: Docker, DBeaver.
+Klone das Repository mit folgendem Befehl:
 
-Optional: 13 Gehirnzellen
+```
+git clone https://github.com/Machsiim/htldesk
+```
 
-Schritt 1: Das Programm Docker starten.
+## Kurzbeschreibung
 
-Schritt 2: startServer.bat im ersten Unterordner ausführen.
+// TODO
 
-Schritt 3: Wenn das deine erste Ausführung des Projekts ist, musst du erstmal eine neue Database in DBeaver hinzufügen. Dazu DBeaver starten und unter Database/New Database Connection die Datenbank eingeben. MariaDB --Next--> Port: 13306, Database leer lassen, Username: root, Password: mariadb_root_password, --Finish-->
+## Teammitglieder
 
-Frontend Extra Schritt: Wenn du deine Änderungen auf den Server draufspielen willst und nicht nur in Dev arbeiten willst, musst du nach jeder Veränderung "npm run build" ausführen. Dabei nicht vergessen im htldesk/htldesk/htldesk.Client Verzeichnis sein. (Den Server muss man nicht neustarten, da dieser die Änderungen normalerweise live übernehmen sollte.
+| Name                    | Email                  | Aufgabenbereich                           |
+| ----------------------- | -------------------------| ----------------------------------------|
+| Mohamad Aldulemi, 3CHIF | alu22162@spengergasse.at | Frontend Design, Content                |
+| Amin Dashaev,     3CHIF | das22180@spengergasse.at | Code Optimierung, Debugging             |
+| Eric Fischer,     3CHIF | fis22360@spengergasse.at | Design, Login/Register Pages            |
+| Dominik Kusion,   3CHIF | kus22544@spengergasse.at | Authentication, Backend                 |
+| Maxim Romanenko,  3CHIF | rom22634@spengergasse.at | C# Backend                              |
 
-Sonst Right Click auf localhost:13306 und Refresh.
+## Voraussetzungen
 
-2) Ich will am Projekt arbeiten. Was soll ich machen?
-Oben links im Browser findest du Issues. Dort siehst du grundsätzlich an was gerade gearbeitet wird. Wenn nichts offen ist, einfach nachfragen.
+Das Projekt verwendet .NET in der Version >= 6. Prüfe mit folgendem Befehl, ob die .NET SDK in der
+Version 6 oder 7 am Rechner installiert ist:
 
-Wenn du nun weißt, an was du arbeiten willst, musst du erstmal in den richtigen Branch kommen. Wenn es ein Issue gibt, einfach den Branch vom Issue verwenden und wenn nicht, einen erstellen. Zunächst das Repo reseten und syncen (resetGit und syncGit). Jetzt kannst du am Projekt was lokal verändern und auf einen Branch commiten.
+```
+dotnet --version
+```
 
-3) Ich hab jetzt was geändert, aber wenn ich den Server starte, ändert sich nichts. Was ist los?
-Wenn du in Visual Studio was am Backend geändert hast, darfst du nicht vergessen, alle Datein mit STRG + S zu speichern. Im Gegensatz zur Build Aktion in Visual Studio, werden die Datein nicht gespeichert.
+Die .NET 6 SDK (LTS Version) kann von https://dotnet.microsoft.com/en-us/download/dotnet/6.0 für alle
+Plattformen geladen werden.
 
-Wenn du jedoch am Frontend was geändert hast, musst du vor jeder Ausführung einen extra Schritt erledigen. In Visual Studio oder in CMD musst du dich ins Verzeichnis "C:\HTL Desk Projekt\htldesk\htldesk\htldesk.Client" navigieren und dort "npm run build" ausführen. Jetzt sollte alles funktionieren.
+Zum Prüfen der Docker Installation kann der folgende Befehl verwendet werden. Er muss die Version
+zurückgeben:
 
-PS: Stand 26.12.2022 02:58: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.
+```
+docker --version
+```
+
+Im Startskript wird der Container geladen, bevor der Server gestartet wird.
+
+## Starten des Programmes
+
+Führe nach dem Klonen im Terminal den folgenden Befehl aus, um den Server zu starten.
+
+**Windows**
+
+```
+startServer.cmd
+```
+
+**macOS, Linux**
+
+```
+./startServer.sh
+```
+
+Nach dem Starten des Servers kann im Browser die Seite **http://localhost:5000**
+aufgerufen werden. Falls die Meldung erscheint, dass das Zertifikat nicht geprüft werden kann,
+muss mit *Fortsetzen* bestätigt werden.
+

@@ -11,7 +11,7 @@ namespace htldesk.Webapi.Controllers
 
     public class EntriesController : ControllerBase
     {
-        
+
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly HtldeskContext _db;
@@ -26,11 +26,21 @@ namespace htldesk.Webapi.Controllers
         [HttpGet("{guid:Guid}")]
         public IActionResult GetEntries(Guid guid)
         {
-            var accountingAccount = _db.Files.FirstOrDefault(f => f.Guid == guid);
+            var accountingAccount = _db.AccountingAccounts.FirstOrDefault(f => f.Guid == guid);
             if (accountingAccount is null) { return NotFound(); }
             var entries = _db.Entries.Where(e => e.AccountingAccountGuid == accountingAccount.Guid).ToList();
             var entriesDto = _mapper.Map<List<EntriesDto>>(entries);
             return Ok(entriesDto);
+        }
+
+        [HttpGet("count/{guid:Guid}")]
+        public IActionResult GetEntriesCount(Guid guid)
+        {
+            var accountingAccount = _db.AccountingAccounts.FirstOrDefault(f => f.Guid == guid);
+            if (accountingAccount is null) { return NotFound(); }
+            var entries = _db.Entries.Where(e => e.AccountingAccountGuid == accountingAccount.Guid).ToList();
+            var entriesDto = _mapper.Map<List<EntriesDto>>(entries);
+            return Ok(entriesDto.Count);
         }
 
         [HttpPost("upload")]

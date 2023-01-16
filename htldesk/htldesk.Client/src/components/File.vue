@@ -1,7 +1,7 @@
 <script>
 export default {
     props: {
-        name: String,
+        name: String
     }
 };
 </script>
@@ -9,7 +9,7 @@ export default {
 
 <template>
     <div class="imageContainer">
-        <div class="overlayText">{{ name }}</div>
+        <div>{{ this.$store.state.file.guid }}</div>
     </div>
 </template>
 

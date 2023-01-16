@@ -3,10 +3,10 @@ import File from './File.vue';
 </script>
 
 <template>
-    <div class="files center">
-        <div class="fileName">{{ FileName1 }}</div>
-        <div class="fileName">{{ FileName2 }}</div>
-        <div class="fileName">{{ FileName3 }}</div>
+    <div class="files">
+        <div v-for="f in fileNames" v-bind:key="f.guid">
+            <RouterLink v-on:click="this.$store.commit('changeFile', f.guid)" v-bind:to="`/files/${Username}/${f.name}`">{{ f.name }}</RouterLink>
+        </div>
     </div>
 </template>
 
@@ -14,9 +14,8 @@ import File from './File.vue';
 export default {
     data() {
         return {
-            FileName1: 'Hier sollte was sein',
-            FileName2: 'Hier sollte was sein',
-            FileName3: 'Hier sollte was sein'
+            Username: this.$store.state.user.username,
+            fileNames:[],
         };
     },
     computed: {
@@ -32,9 +31,7 @@ export default {
             }
 
             res.json().then((data) => {
-                this.FileName1 = data[0].name;
-                this.FileName2 = data[1].name;
-                this.FileName3 = data[2].name;
+                this.fileNames = data;
             })
 
         } catch (e) {
@@ -59,6 +56,8 @@ export default {
 .files {
     display: flex;
     gap: 13rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .fileName {
