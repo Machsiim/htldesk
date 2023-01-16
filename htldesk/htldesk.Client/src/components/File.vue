@@ -22,8 +22,6 @@ export default {
 }
 
 
-
-
 .overlayText {
     position: absolute;
     bottom: 8px;
