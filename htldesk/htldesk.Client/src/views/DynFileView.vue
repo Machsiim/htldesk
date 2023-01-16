@@ -12,6 +12,7 @@ import File from '../components/File.vue'
         <File v-bind:name=$route.params.filename></File>
         <div v-for="a in accounts" v-bind:key="a.guid">
             <AccountingAccount v-bind:guid="a.guid"></AccountingAccount> <!--add v-bind:guid="xxx" later-->
+            Test
         </div>
 
     </div>
