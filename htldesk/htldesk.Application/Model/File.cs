@@ -10,12 +10,10 @@ namespace htldesk.Application.Model
 {
     public class File
     {
-
         public File(string name, Guid userGuid)
         {
             Name = name;
             UserGuid = userGuid;
-
         }
         #pragma warning disable CS8618
         protected File() { }
@@ -26,8 +24,8 @@ namespace htldesk.Application.Model
         public int Id { get; private set; }
         public Guid Guid { get; set; }
         [MaxLength(50)]
-        public string Name { get; set; }
         
+        public string Name { get; set; }
         public Guid UserGuid { get; private set; }
 
     }
