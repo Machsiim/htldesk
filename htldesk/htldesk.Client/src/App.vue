@@ -65,7 +65,7 @@ export default {
 
 <style>
 footer {
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
   background-color: black;
@@ -87,6 +87,7 @@ body {
   background-color: #1f6032 !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white !important;
+  position: relative;
 }
 
 #appContainer {
