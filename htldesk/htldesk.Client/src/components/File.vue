@@ -6,6 +6,7 @@ export default {
 };
 </script>
 
+
 <template>
     <div class="imageContainer">
         <div class="overlayText">{{ name }}</div>
@@ -20,6 +21,9 @@ export default {
     opacity: 0.3;
 }
 
+
+
+
 .overlayText {
     position: absolute;
     bottom: 8px;
@@ -31,6 +35,9 @@ export default {
 .imageContainer:hover .overlayText {
     color: white;
 }
+
+
+
 .imageContainer:hover img {
     opacity: 1;
 }
