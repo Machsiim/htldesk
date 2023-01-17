@@ -75,10 +75,21 @@ export default {
 </script>
 
 <style>
+<<<<<<< HEAD
 .footer-dark {
   padding:50px 0;
   color:#f0f9ff;
   background-color:#282d32;
+=======
+footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+>>>>>>> ba23bd5b49877acb6d68c78c0a5b760fed948d9e
 }
 
 .footer-dark h3 {
@@ -180,6 +191,7 @@ body {
   background-color: #1f6032 !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white !important;
+  position: relative;
 }
 
 #appContainer {

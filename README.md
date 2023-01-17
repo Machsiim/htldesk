@@ -8,7 +8,8 @@ git clone https://github.com/Machsiim/htldesk
 
 ## Kurzbeschreibung
 
-// TODO
+Die Web-Applikation HtlDesk soll Schülern dabei helfen, Buchungen im Fach Rechnungswesen einfacher und vorallem schneller zu machen. 
+Jeder der sich registriert, kann Files erstellen, in denen er Buchhaltungskonten (Excel ähnlich) erstellen, bearbeiten und löschen kann. HtlDesk ist jedoch kein reiner Excel Ersatz, sondern bietet Quality-Of-Life Features wie Text-Highlighting und eine übersichtliche Tabellen-Führung. 
 
 ## Teammitglieder
 
