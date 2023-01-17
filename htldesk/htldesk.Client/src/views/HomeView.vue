@@ -5,7 +5,7 @@ import FilePanel from "../components/FilePanel.vue";
 <template>
   <main>
     <div class="home">
-      <h1 class="text-center">Willkommen auf unserer Webapllikation</h1>
+      <h1 class="text-center">Willkommen auf unserer Webapplikation</h1>
 
 
 
@@ -29,7 +29,7 @@ import FilePanel from "../components/FilePanel.vue";
           <div class="card-body">
             <h4>Leicht arbeiten</h4>
             <p>
-              Mit unserer Webapllikation haben Sie die Möglichkeit leicht zu
+              Mit unserer Webapplikation haben Sie die Möglichkeit leicht zu
               arbeiten.
             </p>
           </div>
