@@ -32,7 +32,7 @@
 
     <RouterView />
     <div class="footer-dark">
-      <footer>
+      <footer class="fixed-bottom">
         <div class="container">
           <div class="row">
             <div class="col-sm-6 col-md-3 item">
