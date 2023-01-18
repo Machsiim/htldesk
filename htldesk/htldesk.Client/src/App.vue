@@ -124,7 +124,7 @@ footer {
   opacity: 0.6;
 }
 
-.footer-link:hover{
+.footer-link:hover {
   color: blue;
   text-decoration: none;
 }
@@ -237,7 +237,8 @@ input[type="password"] {
   border-radius: 4px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+#submitbtn {
   width: 100%;
   background-color: #4caf50;
   color: white;

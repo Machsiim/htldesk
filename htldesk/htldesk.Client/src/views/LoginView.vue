@@ -12,7 +12,9 @@ import axios from "axios";
         <label>Password:</label>
         <input type="password" id="password" v-model="model.password" />
         <hr />
-        <button type="button" v-on:click="sendLoginData">Submit</button>
+        <button type="button" id="submitbtn" v-on:click="sendLoginData">
+          Submit
+        </button>
         (Hint: Use lenz, Password 1111)
       </template>
       <template v-else>
@@ -38,7 +40,7 @@ export default {
       this.$store.commit("authenticate", null);
     },
     async sendLoginData() {
-      console.log("Sending login data")
+      console.log("Sending login data");
       try {
         const userdata = (await axios.post("users/login", this.model)).data;
         axios.defaults.headers.common[
