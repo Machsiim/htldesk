@@ -9,30 +9,30 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application
 {
-    public class Entry
+    public class Posting
     {
 
         #pragma warning disable CS8618
-        protected Entry() {}
+        protected Posting() {}
         #pragma warning restore CS8618
-        
-        public Entry(Guid accountingAccountGuid, Guid gegenKonto, decimal haben, decimal soll, DateTime datum)
+
+        public Posting(decimal amount, Guid to, Guid from, Guid userGuid, DateTime date)
         {
-            this.AccountingAccountGuid = accountingAccountGuid;
-            this.GegenKonto = gegenKonto; 
-            this.Haben = haben;
-            this.Soll = soll; 
-            this.Datum = datum;
+            Amount = amount;
+            To = to;
+            From = from;
+            Datum = date;
+            UserGuid = userGuid;
         }
-        
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
         public Guid Guid { get; set; }
-        public Guid AccountingAccountGuid { get; set; }
-        public Guid GegenKonto { get; set; }
-        public decimal Haben { get; set; }
-        public decimal Soll { get; set; }
+        public Guid To { get; set; }
+        public Guid UserGuid { get; set; }
+        public Guid From { get; set; }
+        public decimal Amount { get; set; }
         public DateTime Datum { get; set; }
     }
 }

@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application.Dto
 {
-    public record AccountingAccountDto(
+    public record AccountDto(
     
         Guid Guid,
 
         [StringLength(255, MinimumLength = 1, ErrorMessage = "Die Länge des Namens ist ungültig.")]
         string Name,
         
-        Guid FileGuid)
+        Guid UserGuid)
     {
-        // Validation Result bewusst ausgelassen 
+
     }
 }
   

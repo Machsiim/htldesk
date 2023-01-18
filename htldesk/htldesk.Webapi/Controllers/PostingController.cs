@@ -9,14 +9,14 @@ namespace htldesk.Webapi.Controllers
     [ApiController]        // Muss bei jedem Controller stehen
     [Route("/api/entries")]  // Muss bei jedem Controller stehen
 
-    public class EntriesController : ControllerBase
+    public class PostingController : ControllerBase
     {
 
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly HtldeskContext _db;
 
-        public EntriesController(HtldeskContext context, IConfiguration config, IMapper mapper)
+        public PostingController(HtldeskContext context, IConfiguration config, IMapper mapper)
         {
             _db = context;
             _config = config;
@@ -24,13 +24,15 @@ namespace htldesk.Webapi.Controllers
         }
 
         [HttpGet("{guid:Guid}")]
+        public IActionResult GetEntrie(Guid guid)
+        {
+            return Ok(_db.Postings.Where(p => p.Guid == guid));
+        }
+
+        [HttpGet("")]
         public IActionResult GetEntries(Guid guid)
         {
-            var accountingAccount = _db.AccountingAccounts.FirstOrDefault(f => f.Guid == guid);
-            if (accountingAccount is null) { return NotFound(); }
-            var entries = _db.Entries.Where(e => e.AccountingAccountGuid == accountingAccount.Guid).ToList();
-            var entriesDto = _mapper.Map<List<EntriesDto>>(entries);
-            return Ok(entriesDto);
+            return Ok(_db.Postings.Where(p => p.Guid == guid));
         }
 
         [HttpGet("count/{guid:Guid}")]
@@ -38,16 +40,16 @@ namespace htldesk.Webapi.Controllers
         {
             var accountingAccount = _db.AccountingAccounts.FirstOrDefault(f => f.Guid == guid);
             if (accountingAccount is null) { return NotFound(); }
-            var entries = _db.Entries.Where(e => e.AccountingAccountGuid == accountingAccount.Guid).ToList();
-            var entriesDto = _mapper.Map<List<EntriesDto>>(entries);
+            var entries = _db.Postings.Where(e => e.UserGuid == accountingAccount.Guid).ToList();
+            var entriesDto = _mapper.Map<List<PostingDto>>(entries);
             return Ok(entriesDto.Count);
         }
 
         [HttpPost("upload")]
-        public IActionResult UploadEntries(EntriesDto entriesDto)
+        public IActionResult UploadEntries(PostingDto entriesDto)
         {
-            var entry = _mapper.Map<Entry>(entriesDto);
-            _db.Entries.Add(entry);
+            var entry = _mapper.Map<Posting>(entriesDto);
+            _db.Postings.Add(entry);
             try { _db.SaveChanges(); }
             catch (DbUpdateException) { return BadRequest(); }
             return Ok(entry);
@@ -56,23 +58,23 @@ namespace htldesk.Webapi.Controllers
         [HttpDelete("{guid:Guid}")]
         public IActionResult DeleteEntries(Guid guid)
         {
-            var entry = _db.Entries.FirstOrDefault(e => e.Guid == guid);
+            var entry = _db.Postings.FirstOrDefault(e => e.Guid == guid);
             if (entry is null) { return NotFound(); }
-            _db.Entries.Remove(entry);
+            _db.Postings.Remove(entry);
             _db.SaveChanges();
             return Ok();
         }
 
         [HttpPut("{guid:Guid}")]
-        public IActionResult EditEntries(Guid guid, EntriesDto entriesDto)
+        public IActionResult EditEntries(Guid guid, PostingDto postingDto)
         {
-            var entry = _db.Entries.FirstOrDefault(e => e.Guid == guid);
+            var entry = _db.Postings.FirstOrDefault(e => e.Guid == guid);
             if (entry is null) { return NotFound(); }
-            entry.AccountingAccountGuid = entriesDto.AccountingAccountGuid;
-            entry.Datum = entriesDto.Datum;
-            entry.GegenKonto = entriesDto.GegenKonto;
-            entry.Haben = entriesDto.Haben;
-            entry.Soll = entriesDto.Soll;
+            entry.Amount = postingDto.Amount;
+            entry.Datum = postingDto.Datum;
+            entry.From = postingDto.From;
+            entry.To = postingDto.To;
+            entry.UserGuid = postingDto.UserGuid;
             _db.SaveChanges();
             return Ok();
         }

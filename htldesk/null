@@ -1,2 +1,0 @@
-Error response from daemon: driver failed programming external connectivity on endpoint mariadb (7be03156832ff3c543f466b44f1700808d16b5df5eaaa5c57abcf7bb0365f81c): Bind for 0.0.0.0:13306 failed: port is already allocated
-Error: failed to start containers: mariadb

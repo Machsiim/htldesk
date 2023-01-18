@@ -1,36 +1,28 @@
 @startuml "Model"
 
 entity User {
+    + Id : int
+    + Firstname : string
+    + Lastname : string
+    + Email : string
+    + Salt : string
+    + PasswordHash : string
+}
 
+entity Account {
     + Id : int
     + Name : string
-    + Email : string
-    + Password : string
-    + Files : File[3]
 }
 
-entity File {
-    + Id : int
-    + accountingAccounts : List<AccountingAccount>
+entity Posting {
+    + Id
+    + From : Account
+    + To : Account
+    + Amount : decimal
+    + Date: DateTime
 }
 
-entity accountingAccount {
-        + AccountID : int
-        + Entries : List<Entry>
-}
-
-entity Entry {
-    + EntryId : int
-    + GegenKonto : accountingAccount
-    + Haben : decimal
-    + Soll : decimal
-    + Datum : DateTime
-}
-
-User o--> File 
-
-File o--> accountingAccount 
-
-accountingAccount o--> Entry 
+Posting o--> Account : "> From"
+Posting o--> Account : "> To"
 
 @enduml

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace htldesk.Application.Dto
 {
-    public record EntriesDto(
+    public record PostingDto(
         Guid Guid,
-        Guid AccountingAccountGuid,
-        Guid GegenKonto,
-        decimal Haben,
-        decimal Soll,
+        Guid To,
+        Guid From,
+        Guid UserGuid,
+        decimal Amount,
         DateTime Datum)
     {
         // Validation Result

@@ -11,9 +11,8 @@ public class HtldeskContext : DbContext
 {
     // TODO: Add your DbSets
     public DbSet<User> Users => Set<User>();
-    public DbSet<File> Files => Set<File>();
-    public DbSet<Entry> Entries => Set<Entry>();
-    public DbSet<AccountingAccount> AccountingAccounts => Set<AccountingAccount>();
+    public DbSet<Posting> Postings => Set<Posting>();
+    public DbSet<Account> AccountingAccounts => Set<Account>();
 
     public HtldeskContext(DbContextOptions<HtldeskContext> opt) : base(opt) { }
 
@@ -65,43 +64,12 @@ public class HtldeskContext : DbContext
         SaveChanges();
 
 
-        // Files
-        var files = new Faker<File>("de").CustomInstantiator(f =>
+        // Accounts
+        var account = new Faker<Account>("de").CustomInstantiator(f =>
         {
-            return new File(
+            return new Account(
                 name: f.Name.LastName(),
                 userGuid: f.Random.Guid())
-
-            { Guid = f.Random.Guid() };
-        })
-        .Generate(30)
-        .ToList();
-
-        // Lenz Files
-        List<File> LenzFiles = new List<File>();
-        File file1 = new File("LenzFile1", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
-        File file2 = new File("LenzFile2", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
-        File file3 = new File("LenzFile3", Guid.Parse("f07f6ace-c6a7-feb7-5990-7ce38c14bbb1"));
-
-        file1.Guid = Guid.Parse("08daf345-92a9-4401-8e0d-da6705623951");
-        file2.Guid = Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f");
-        file3.Guid = Guid.Parse("08daf345-92a9-4ac1-845e-43b54ed66c3c");
-
-        LenzFiles.Add(file1);
-        LenzFiles.Add(file2);
-        LenzFiles.Add(file3);
-
-
-        Files.AddRange(files);
-        Files.AddRange(LenzFiles);
-        SaveChanges();
-
-        // AccountingAccount
-        var account = new Faker<AccountingAccount>("de").CustomInstantiator(f =>
-        {
-            return new AccountingAccount(
-                name: f.Name.LastName(),
-                fileGuid: f.Random.Guid())
             { Guid = f.Random.Guid() };
         })
         .Generate(30)
@@ -110,11 +78,11 @@ public class HtldeskContext : DbContext
         SaveChanges();
 
         // Lenz AccountingAccounts
-        List<AccountingAccount> LenzAccountingAccounts = new List<AccountingAccount>();
-        AccountingAccount account1 = new AccountingAccount("LenzAccount1", Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f"));
-        AccountingAccount account2 = new AccountingAccount("LenzAccount2", Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f"));
-        AccountingAccount account3 = new AccountingAccount("LenzAccount3", Guid.Parse("08daf345-92a9-4ab8-83e6-db48f1a98c9f"));
-
+        List<Account> LenzAccountingAccounts = new List<Account>();
+        Account account1 = new Account("LenzAccount1", Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"));
+        Account account2 = new Account("LenzAccount2", Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"));
+        Account account3 = new Account("LenzAccount3", Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"));
+        
         account1.Guid = Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7");
         account2.Guid = Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b8");
         account3.Guid = Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b9");
@@ -125,44 +93,44 @@ public class HtldeskContext : DbContext
         AccountingAccounts.AddRange(LenzAccountingAccounts);
         SaveChanges();
 
-        // Entry
-        var entries = new Faker<Entry>("de").CustomInstantiator(f =>
+        // Postings
+        var entries = new Faker<Posting>("de").CustomInstantiator(f =>
         {
-            return new Entry(
-                accountingAccountGuid: f.Random.Guid(),
-                gegenKonto: f.Random.Guid(),
-                haben: f.Random.Int(0, 1000),
-                soll: f.Random.Int(0, 1000),
-                datum: f.Date.Past())
+            return new Posting(
+                from: f.Random.Guid(),
+                to: f.Random.Guid(),
+                amount: f.Random.Int(0, 1000),
+                userGuid: f.Random.Guid(),
+                date: f.Date.Past())
             { Guid = f.Random.Guid() };
         }).Generate(30).ToList();
-        Entries.AddRange(entries);
+        Postings.AddRange(entries);
         SaveChanges();
 
-        // Lenz Entries
-        List<Entry> LenzEntries = new List<Entry>();
-        Entry entry1 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 100, 0, DateTime.Now);
-        Entry entry2 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 0, 100, DateTime.Now);
-        Entry entry3 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 100, 0, DateTime.Now);
+        // Lenz Postings
+        List<Posting> LenzEntries = new List<Posting>();
+        Posting entry1 = new Posting(321, Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
+        Posting entry2 = new Posting(123, Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
+        Posting entry3 = new Posting(231, Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
         LenzEntries.Add(entry1);
         LenzEntries.Add(entry2);
         LenzEntries.Add(entry3);
 
-        Entry entry4 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 100, 0, DateTime.Now);
-        Entry entry5 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 0, 100, DateTime.Now);
-        Entry entry6 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 100, 0, DateTime.Now);
+        Posting entry4 = new Posting(421, Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
+        Posting entry5 = new Posting(523, Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
+        Posting entry6 = new Posting(868, Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
         LenzEntries.Add(entry4);
         LenzEntries.Add(entry5);
         LenzEntries.Add(entry6);
 
-        Entry entry7 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 100, 0, DateTime.Now);
-        Entry entry8 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 0, 100, DateTime.Now);
-        Entry entry9 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 100, 0, DateTime.Now);
+        Posting entry7 = new Posting(326, Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);   
+        Posting entry8 = new Posting(945, Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
+        Posting entry9 = new Posting(111, Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), DateTime.Now);
         LenzEntries.Add(entry7);
         LenzEntries.Add(entry8);
         LenzEntries.Add(entry9);
 
-        Entries.AddRange(LenzEntries);
+        Postings.AddRange(LenzEntries);
         SaveChanges();
     }
 }

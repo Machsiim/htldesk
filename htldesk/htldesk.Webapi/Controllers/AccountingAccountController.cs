@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace htldesk.Webapi.Controllers
 {
     [ApiController]        // Muss bei jedem Controller stehen
-    [Route("/api/accountingaccounts")]  // Muss bei jedem Controller stehen
+    [Route("/api/accounts")]  // Muss bei jedem Controller stehen
     public class AccountingAccountController : ControllerBase
     {
 
@@ -21,33 +21,28 @@ namespace htldesk.Webapi.Controllers
         }
 
         [HttpGet("{fileGuid:Guid}")]
-        public IActionResult GetAccountingAccounts(Guid fileGuid)
+        public IActionResult GetAccountingAccounts(Guid userGuid)
         {
-            var file = _db.Files.FirstOrDefault(f => f.Guid == fileGuid);
-            if (file is null) return BadRequest();
-            var accountingAccounts = _db.AccountingAccounts.Where(a => a.FileGuid == file.Guid).ToList();
+            var accountingAccounts = _db.AccountingAccounts.Where(a => a.UserGuid == userGuid);
             return Ok(accountingAccounts);
         }
 
         [HttpGet("count/{fileGuid:Guid}")]
-        public IActionResult CountAccountingAccounts(Guid fileGuid)
+        public IActionResult CountAccountingAccounts(Guid userGuid)
         {
             int count = 0;
-            var file = _db.Files.FirstOrDefault(f => f.Guid == fileGuid);
-            if (file is null) return BadRequest();
-            foreach (AccountingAccount a in _db.AccountingAccounts)
+            var user = _db.Users.FirstOrDefault(u => u.Guid == userGuid);
+            foreach (Account a in _db.AccountingAccounts)
             {
-                if (a.FileGuid == file.Guid) count++;
+                if (a.UserGuid == userGuid) count++;
             }
             return Ok(count);
         }
 
         [HttpPost("create")]
-        public IActionResult CreateAccountingAccount(AccountingAccountDto accountingAccountDto)
+        public IActionResult CreateAccountingAccount(AccountDto accountingAccountDto)
         {
-            var file = _db.Files.FirstOrDefault(f => f.Guid == accountingAccountDto.FileGuid);
-            if (file is null) return BadRequest();
-            var accountingAccount = new AccountingAccount(accountingAccountDto.Name, accountingAccountDto.FileGuid);
+            var accountingAccount = new Account(accountingAccountDto.Name, accountingAccountDto.UserGuid);
             _db.AccountingAccounts.Add(accountingAccount);
             try { _db.SaveChanges(); }
             catch (DbUpdateException) { return BadRequest(); }
@@ -65,7 +60,7 @@ namespace htldesk.Webapi.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult UpdateAccountingAccount(AccountingAccountDto accountingAccountDto)
+        public IActionResult UpdateAccountingAccount(AccountDto accountingAccountDto)
         {
             var accountingAccount = _db.AccountingAccounts.FirstOrDefault(a => a.Guid == accountingAccountDto.Guid);
             if (accountingAccount is null) { return NotFound(); }
