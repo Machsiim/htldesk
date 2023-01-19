@@ -6,14 +6,13 @@ import FilePanel from '../components/FilePanel.vue';
 
 <template>
     <div>
-        <div class="welcome">Willkommen, {{ username }}</div>
-        <div class="filesText">Welches File wollen Sie heute bearbeiten?</div>
-     	<FilePanel></FilePanel>
-  </div>
+        <div class="welcome">Sie sind jetzt als "{{ username }}" eingeloggt</div>
+        <FilePanel></FilePanel>
+    </div>
 </template>
 
 <script>
-    export default {
+export default {
     data() {
         return {
             model: {
@@ -32,16 +31,16 @@ import FilePanel from '../components/FilePanel.vue';
 </script>
 
 <style>
-        .welcome {
-        font-size: 2em;
-        margin-top: 8%;
-        text-align: center;
-    }
+.welcome {
+    font-size: 2em;
+    margin-top: 8%;
+    text-align: center;
+}
 
-    .filesText {
-        font-size: 1.5em;
-        margin-top: 8%;
-        margin-bottom: 1.5%;
-        text-align: center;
-    }
+.filesText {
+    font-size: 1.5em;
+    margin-top: 8%;
+    margin-bottom: 1.5%;
+    text-align: center;
+}
 </style>

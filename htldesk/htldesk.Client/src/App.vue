@@ -23,7 +23,7 @@
             >
           </div>
           <div v-if="authenticated">
-            <RouterLink to="/dashboard" class="nav-link">Dashboard</RouterLink>
+            <RouterLink to="/accounts" class="nav-link">Accounts</RouterLink>
           </div>
         </nav>
         <br />
