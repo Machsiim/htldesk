@@ -31,7 +31,7 @@
     </header>
 
     <RouterView />
-    <div class="footer-dark">
+    <!-- <div class="footer-dark">
       <footer class="fixed-bottom">
         <div class="container">
           <div class="row">
@@ -78,7 +78,7 @@
           <p class="copyright">InParis © 2023</p>
         </div>
       </footer>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -93,8 +93,9 @@ export default {
 </script>
 
 <style>
-footer {
-  position: sticky;
+
+/* footer {
+  position: absolute;
   bottom: 0;
   width: 100%;
   background-color: black;
@@ -102,6 +103,19 @@ footer {
   padding: 20px;
   text-align: center;
 }
+
+
+.footer-dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100vh;
+}
+
+.footer-dark {
+  position: relative;
+}
+
 
 .footer-dark h3 {
   margin-top: 0;
@@ -161,7 +175,7 @@ footer {
   opacity: 0.3;
   font-size: 13px;
   margin-bottom: 0;
-}
+} */
 
 /* Add this style to the parent element */
 #appContainer {
@@ -176,7 +190,6 @@ body {
   background-color: #1f6032 !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white !important;
-  position: relative;
 }
 
 #appContainer {
