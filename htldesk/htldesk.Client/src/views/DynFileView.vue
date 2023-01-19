@@ -9,9 +9,12 @@ import File from '../components/File.vue'
         <br>
         <br>
         <br>
+        <div class="buttons">
+            <RouterLink to="/dashboard" class="nav-link">Dashboard</RouterLink>
+        </div>
         <File v-bind:name=$route.params.filename></File>
         <div v-for="a in accounts" v-bind:key="a.guid">
-            <AccountingAccount v-bind:guid="a.guid"></AccountingAccount> <!--add v-bind:guid="xxx" later-->
+            <AccountingAccount v-bind:guid="a.guid" v-bind:name="a.name"></AccountingAccount>
         </div>
 
     </div>
@@ -29,7 +32,20 @@ export default {
         returnFilename() {
             console.log(this.$route.params.filename);
             return this.$route.params.filename;
-        }
+        },
+
+        async create() {
+            console.log("create");
+        },
+
+        async change() {
+            console.log("change");
+            async
+        },
+
+        async remove() {
+            console.log("remove");
+        },
     },
     mounted: async function () {
         try {

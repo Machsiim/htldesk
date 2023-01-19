@@ -30,26 +30,7 @@
     </header>
 
     <RouterView />
-    <footer class="text-center text-white" style="background-color: black">
-      <div class="container p-4 pb-0">
-        <section class="">
-          <p class="d-flex justify-content-center align-items-center">
-            <span class="me-3 mr-3">Registrieren Sie sich kostenlos! </span>
-            <button type="button" class="btn btn-outline-light btn-rounded">
-              Registrieren!
-            </button>
-          </p>
-        </section>
-        <section class="">
-          <p class="d-flex justify-content-center align-items-center">
-            <span class="me-3 mr-3">Melden Sie sich an </span>
-            <button type="button" class="btn btn-outline-light btn-rounded">
-              Anmelden!
-            </button>
-          </p>
-        </section>
-      </div>
-    </footer>
+  
   </div>
 </template>
 
