@@ -1,17 +1,41 @@
 <script setup>
+import { createBlockStatement } from '@vue/compiler-core';
 import axios from 'axios';
+import { onMounted } from 'vue';
 </script>
 
 <template>
-    <div>
+    <div class="select">
         <select>
-            <option v-for="file in files" v-bind:key="file.guid">
-                {{ file.name }}
+            <option v-for="a in accounts" v-bind:key="a.guid">
+                {{ a.name }}
             </option>
         </select>
     </div>
 </template>
 
 <script>
+export default {
+    data() {
+        return {
+            accounts: [],
+        }
+    },
+
+    async mounted() {
+        const response = await axios.get('https://localhost:5001/api/accountingaccounts/' + this.$store.state.file.guid);
+        console.log(this.$store.state.file.guid)
+        this.accounts = response.data;
+        console.log(this.accounts)
+    }
+}
 
 </script>
+
+<style>
+.select {
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+</style>

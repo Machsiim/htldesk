@@ -10,7 +10,9 @@ import File from '../components/File.vue'
         <br>
         <br>
         <div class="buttons">
-            <RouterLink to="/dashboard" class="nav-link">Dashboard</RouterLink>
+            <RouterLink to="/create" class="nav-link">Create</RouterLink>
+            <RouterLink to="/change" class="nav-link">Change</RouterLink>
+            <RouterLink to="/delete" class="nav-link">Delete</RouterLink>
         </div>
         <File v-bind:name=$route.params.filename></File>
         <div v-for="a in accounts" v-bind:key="a.guid">
@@ -67,3 +69,9 @@ export default {
     components: { AccountingAccount }
 };
 </script>
+
+<style>
+    .buttons {
+        text-align: center;
+    }
+</style>
