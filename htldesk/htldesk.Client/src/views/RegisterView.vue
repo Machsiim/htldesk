@@ -1,60 +1,65 @@
 <template>
   <div>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
 
-  <div class="register">
-    <h1 id="reg_form">Registration Form</h1>
-    <form v-on:submit.prevent="register">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" />
-      <br />
+    <div class="register">
+      <h1 id="reg_form">Registration Form</h1>
+      <form v-on:submit.prevent="register">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <br />
 
-      <small class="error"></small>
-      <hr />
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" />
-      <br />
+        <small class="error"></small>
+        <hr />
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" />
+        <br />
 
-      <small class="error"></small>
-      <hr />
-      <label for="password">Password:</label>
-      <div id="password-container">
-        <input type="password" id="password" ref="password" name="password" />
+        <small class="error"></small>
+        <hr />
+        <label for="password">Password:</label>
+        <div id="password-container">
+          <input type="password" id="password" ref="password" name="password" />
+          <i
+            class="fa fa-eye eye-icon"
+            id="eye_icon"
+            ref="eye_icon"
+            v-on:click="
+              togglePasswordVisibility(this.$refs.password, this.$refs.eye_icon)
+            "
+          ></i>
+        </div>
+        <br />
+
+        <small class="error"></small>
+        <hr />
+        <label for="password2">Confirm Password:</label>
+        <input
+          type="password"
+          id="password2"
+          ref="password2"
+          name="password2"
+        />
         <i
           class="fa fa-eye eye-icon"
-          id="eye_icon"
-          ref="eye_icon"
+          id="eye_icon2"
+          ref="eye_icon2"
           v-on:click="
-            togglePasswordVisibility(this.$refs.password, this.$refs.eye_icon)
+            togglePasswordVisibility(this.$refs.password2, this.$refs.eye_icon2)
           "
         ></i>
-      </div>
-      <br />
+        <br />
+        <small class="error"></small>
+        <hr />
+        <input type="submit" value="Submit" v-on:click="register" />
 
-      <small class="error"></small>
-      <hr />
-      <label for="password2">Confirm Password:</label>
-      <input type="password" id="password2" ref="password2" name="password2" />
-      <i
-        class="fa fa-eye eye-icon"
-        id="eye_icon2"
-        ref="eye_icon2"
-        v-on:click="
-          togglePasswordVisibility(this.$refs.password2, this.$refs.eye_icon2)
-        "
-      ></i>
-      <br />
-      <small class="error"></small>
-      <hr />
-      <input type="submit" value="Submit" v-on:click="register" />
-
-      <p id="success"></p>
-    </form>
+        <p id="success"></p>
+      </form>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -220,5 +225,9 @@ i.fa-eye {
   color: midnightblue;
   cursor: pointer;
   margin-left: -30px;
+}
+#register_button {
+  display: none;
+  visibility: hidden;
 }
 </style>
