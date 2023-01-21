@@ -5,13 +5,17 @@ import { onMounted } from 'vue';
 </script>
 
 <template>
-    <div class="select">
-        <select>
-            <option v-for="a in accounts" v-bind:key="a.guid">
-                {{ a.name }}
-            </option>
-        </select>
+    <div>
+        <h3>Konto ändern</h3>
+        <div class="select">
+            <select>
+                <option v-for="a in accounts" v-bind:key="a.guid">
+                    {{ a.name }}
+                </option>
+            </select>
+        </div>
     </div>
+    
 </template>
 
 <script>

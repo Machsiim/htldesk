@@ -51,6 +51,21 @@ const router = createRouter({
       name: 'change',
       component: () => import('../views/ChangeView.vue')
     },
+    {
+      path: '/change/:accountGuid',
+      name: 'changeentrie',
+      component: () => import('../views/ChangeEntryView.vue')
+    },
+    {
+      path: '/create/:accountGuid',
+      name: 'createentrie',
+      component: () => import('../views/CreateEntryView.vue')
+    },
+    {
+      path: '/delete/:accountGuid',
+      name: 'deleteentrie',
+      component: () => import('../views/DeleteEntryView.vue')
+    },
     
   ]
 })

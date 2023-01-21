@@ -6,7 +6,7 @@ import { onMounted } from 'vue';
 
 <template>
     <div>
-        <h3>Konto löschen</h3>
+        <h3>Buchung löschen</h3>
         <div class="select">
             <select id="fortnite">
                 <option v-for="a in accounts" v-bind:key="a.guid">

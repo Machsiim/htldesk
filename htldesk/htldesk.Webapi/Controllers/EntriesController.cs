@@ -43,7 +43,7 @@ namespace htldesk.Webapi.Controllers
             return Ok(entriesDto.Count);
         }
 
-        [HttpPost("upload")]
+        [HttpPost("create")]
         public IActionResult UploadEntries(EntriesDto entriesDto)
         {
             var entry = _mapper.Map<Entry>(entriesDto);

@@ -6,15 +6,24 @@ import axios from "axios";
     <div class="accounts">
         <br>
         <br>
-        <div>Konto: {{ this.name }}</div>
-        <br>
-        <div v-for="e in this.entries" v-bind:key=e.guid>
-            <div>Datum: {{ e.datum }}</div>
-            <div>Gegenkonto: {{ e.gegenKonto }}</div>
-            <div>Soll: {{ e.soll }}</div>
-            <div>Haben: {{ e.haben }}</div>
-            <br>
-        </div>
+        <div>{{ this.name }}</div>
+        <table>
+            <tr>
+                <th>Datum</th>
+                <th>Gegenkonto</th>
+                <th>Soll</th>
+                <th>Haben</th>
+            </tr>
+
+
+            <tr v-for="e in this.entries" v-bind:key=e.guid>
+                <td>{{ e.datum }}</td>
+                <td>{{ e.gegenKonto }}</td>
+                <td>{{ e.soll }}</td>
+                <td>{{ e.haben }}</td>
+                <br>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -35,7 +44,6 @@ export default {
     mounted: async function () {
         //this.entrieCount = (await axios.get("https://localhost:5001/api/entries/count/" + this.guid)).data;
         this.entries = (await axios.get("https://localhost:5001/api/entries/" + this.guid)).data;
-        console.log(this.entries)
     },
 };
 </script>

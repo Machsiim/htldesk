@@ -14,9 +14,13 @@ import File from '../components/File.vue'
             <RouterLink to="/change" class="nav-link">Change</RouterLink>
             <RouterLink to="/delete" class="nav-link">Delete</RouterLink>
         </div>
-        <File v-bind:name=$route.params.filename></File>
         <div v-for="a in accounts" v-bind:key="a.guid">
             <AccountingAccount v-bind:guid="a.guid" v-bind:name="a.name"></AccountingAccount>
+            <div>
+                <RouterLink v-bind:to="`/create/${a.guid}`" class="nav-link">Create</RouterLink>
+                <RouterLink v-bind:to="`/change/${a.guid}`" class="nav-link">Change</RouterLink>
+                <RouterLink v-bind:to="`/delete/${a.guid}`" class="nav-link">Delete</RouterLink>
+            </div>
         </div>
 
     </div>
@@ -32,7 +36,6 @@ export default {
     },
     methods: {
         returnFilename() {
-            console.log(this.$route.params.filename);
             return this.$route.params.filename;
         },
 
@@ -58,7 +61,6 @@ export default {
 
             res.json().then((data) => {
                 this.accounts = data;
-                console.log(this.accounts);
             })
 
         } catch (e) {
@@ -71,7 +73,7 @@ export default {
 </script>
 
 <style>
-    .buttons {
-        text-align: center;
-    }
+.buttons {
+    text-align: center;
+}
 </style>
