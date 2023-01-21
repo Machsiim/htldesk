@@ -52,11 +52,6 @@ const router = createRouter({
       component: () => import('../views/ChangeView.vue')
     },
     {
-      path: '/change/:accountGuid',
-      name: 'changeentrie',
-      component: () => import('../views/ChangeEntryView.vue')
-    },
-    {
       path: '/create/:accountGuid',
       name: 'createentrie',
       component: () => import('../views/CreateEntryView.vue')
@@ -71,11 +66,7 @@ const router = createRouter({
       name: 'createfile',
       component: () => import('../views/CreateFileView.vue')
     },
-    {
-      path: '/change/entry/:entryGuid',
-      name: 'changeentry',
-      component: () => import('../views/ChangeEntryView.vue')
-    }
+
   ]
 })
 

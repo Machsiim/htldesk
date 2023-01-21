@@ -8,14 +8,18 @@ import { onMounted } from 'vue';
     <div>
         <h3>Konto ändern</h3>
         <div class="select">
-            <select>
+            <select id="fortnite">
                 <option v-for="a in accounts" v-bind:key="a.guid">
                     {{ a.name }}
                 </option>
             </select>
         </div>
+        <div>
+            <input type="text" id="newName" placeholder="Neuer Name">
+            <button v-on:click="changeAccount()">Ändern</button>
+        </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -31,6 +35,28 @@ export default {
         console.log(this.$store.state.file.guid)
         this.accounts = response.data;
         console.log(this.accounts)
+    },
+    methods: {
+        changeAccount() {
+            axios.put('https://localhost:5001/api/accountingaccounts/' + this.getAccountGuid(document.getElementById('fortnite').value), {
+                name: document.getElementById('newName').value,
+                fileGuid: this.$store.state.file.guid,
+            })
+                .then(response => {
+                    this.message = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            this.$router.push('/dashboard');
+        },
+        getAccountGuid(name) {
+            for (let i = 0; i < this.accounts.length; i++) {
+                if (this.accounts[i].name === name) {
+                    return this.accounts[i].guid;
+                }
+            }
+        }
     }
 }
 

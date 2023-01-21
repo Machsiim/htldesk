@@ -25,9 +25,6 @@ import axios from "axios";
                 <td>
                     <button v-on:click="deleteEntry(e.guid)">Löschen</button>
                 </td>
-                <td>
-                    <button v-on:click="editEntry(e.guid)">Bearbeiten</button>
-                </td>
                 <br>
             </tr>
         </table>
