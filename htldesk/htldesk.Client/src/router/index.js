@@ -65,12 +65,17 @@ const router = createRouter({
       path: '/delete/:accountGuid',
       name: 'deleteentrie',
       component: () => import('../views/DeleteEntryView.vue')
-    },{
+    },
+    {
       path: '/create/file',
       name: 'createfile',
       component: () => import('../views/CreateFileView.vue')
     },
-    
+    {
+      path: '/change/entry/:entryGuid',
+      name: 'changeentry',
+      component: () => import('../views/ChangeEntryView.vue')
+    }
   ]
 })
 

@@ -18,8 +18,6 @@ import File from '../components/File.vue'
             <AccountingAccount v-bind:guid="a.guid" v-bind:name="a.name"></AccountingAccount>
             <div>
                 <RouterLink v-bind:to="`/create/${a.guid}`" class="nav-link">Create</RouterLink>
-                <RouterLink v-bind:to="`/change/${a.guid}`" class="nav-link">Change</RouterLink>
-                <RouterLink v-bind:to="`/delete/${a.guid}`" class="nav-link">Delete</RouterLink>
             </div>
         </div>
 
