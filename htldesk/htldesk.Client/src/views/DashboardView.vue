@@ -89,6 +89,7 @@ export default {
 
 <style>
 
+
 #eric:hover {
     color: #1f6032;
 }
