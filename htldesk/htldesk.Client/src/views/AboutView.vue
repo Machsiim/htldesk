@@ -9,7 +9,7 @@
       </p>
     </main>
     <div class="footer-dark">
-    <footer class="text-center text-white">
+    <footer class="text-center text-white" id="foot_about">
       <br>
       <div class="container">
           <div class="row">
@@ -61,7 +61,9 @@
 </template>
 
 <style scoped>
-footer {
+
+
+#foot_about {
   position: fixed;
   bottom: 0;
   width: 100%;

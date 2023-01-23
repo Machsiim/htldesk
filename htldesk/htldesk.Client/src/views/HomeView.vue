@@ -57,7 +57,7 @@ import FilePanel from "../components/FilePanel.vue";
     </div>
     <br>
     <div class="footer-dark">
-    <footer class="text-center text-white">
+    <footer class="text-center text-white" id="foot">
       <br>
       <div class="container">
           <div class="row">
@@ -110,8 +110,8 @@ import FilePanel from "../components/FilePanel.vue";
 
 <style>
 
-footer {
-  position: fixed;
+#foot {
+  position: relative !important;
   bottom: 0;
   width: 100%;
   background-color: black;
