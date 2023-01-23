@@ -5,26 +5,27 @@ import File from '../components/File.vue'
 
 
 <template>
+  <div>
     <div>
-        <br>
-        <br>
-        <br>
-        <div class="buttons">
-            <RouterLink to="/create" class="nav-link">Create</RouterLink>
-            <RouterLink to="/change" class="nav-link">Change</RouterLink>
-            <RouterLink to="/delete" class="nav-link">Delete</RouterLink>
-        </div>
-        <div v-for="a in accounts" v-bind:key="a.guid">
-            <AccountingAccount v-bind:guid="a.guid" v-bind:name="a.name"></AccountingAccount>
-            <div>
-                <RouterLink v-bind:to="`/create/${a.guid}`" class="nav-link">Create</RouterLink>
-            </div>
-        </div>
-
-    <div class="footer-dark">
-    <footer class="text-center text-white" id="dashaev">
       <br>
-      <div class="container">
+      <br>
+      <br>
+      <div class="buttons">
+        <RouterLink to="/create" class="nav-link">Create</RouterLink>
+        <RouterLink to="/change" class="nav-link">Change</RouterLink>
+        <RouterLink to="/delete" class="nav-link">Delete</RouterLink>
+      </div>
+      <div v-for="a in accounts" v-bind:key="a.guid">
+        <AccountingAccount v-bind:guid="a.guid" v-bind:name="a.name"></AccountingAccount>
+        <div>
+          <RouterLink v-bind:to="`/create/${a.guid}`" class="nav-link">Create</RouterLink>
+        </div>
+      </div>
+    </div>
+    <div class="footer-dark">
+      <footer class="text-center text-white" id="dashaev">
+        <br>
+        <div class="container">
           <div class="row">
             <div class="col-sm-6 col-md-3 item">
               <h3>Seiten</h3>
@@ -36,9 +37,7 @@ import File from '../components/File.vue'
                   <RouterLink to="/login" class="footer-link">Login</RouterLink>
                 </li>
                 <li>
-                  <RouterLink to="/register" class="footer-link"
-                    >Register</RouterLink
-                  >
+                  <RouterLink to="/register" class="footer-link">Register</RouterLink>
                 </li>
               </ul>
             </div>
@@ -52,9 +51,7 @@ import File from '../components/File.vue'
                   <RouterLink to="/about" class="footer-link">Team</RouterLink>
                 </li>
                 <li>
-                  <RouterLink to="/about" class="footer-link"
-                    >Karriere</RouterLink
-                  >
+                  <RouterLink to="/about" class="footer-link">Karriere</RouterLink>
                 </li>
               </ul>
             </div>
@@ -68,53 +65,54 @@ import File from '../components/File.vue'
           </div>
           <p class="copyright">InParis © 2023</p>
         </div>
-    </footer>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            fileName: this.$route.params.filename,
-            accounts: [],
-        };
-    },
-    methods: {
-        returnFilename() {
-            return this.$route.params.filename;
-        },
-
-        async create() {
-            console.log("create");
-        },
-
-        async change() {
-            console.log("change");
-            async
-        },
-
-        async remove() {
-            console.log("remove");
-        },
-    },
-    mounted: async function () {
-        try {
-            const res = await fetch('https://localhost:5001/api/accountingaccounts/' + this.$store.state.file.guid);
-            if (!res.ok) {
-                alert('Problem beim Laden der Daten.');
-            }
-
-            res.json().then((data) => {
-                this.accounts = data;
-            })
-
-        } catch (e) {
-            alert('Der Server ist nicht erreichbar.');
-        }
+  data() {
+    return {
+      fileName: this.$route.params.filename,
+      accounts: [],
+    };
+  },
+  methods: {
+    returnFilename() {
+      return this.$route.params.filename;
     },
 
-    components: { AccountingAccount }
+    async create() {
+      console.log("create");
+    },
+
+    async change() {
+      console.log("change");
+      async
+    },
+
+    async remove() {
+      console.log("remove");
+    },
+  },
+  mounted: async function () {
+    try {
+      const res = await fetch('https://localhost:5001/api/accountingaccounts/' + this.$store.state.file.guid);
+      if (!res.ok) {
+        alert('Problem beim Laden der Daten.');
+      }
+
+      res.json().then((data) => {
+        this.accounts = data;
+      })
+
+    } catch (e) {
+      alert('Der Server ist nicht erreichbar.');
+    }
+  },
+
+  components: { AccountingAccount }
 };
 </script>
 
@@ -128,8 +126,8 @@ export default {
 
 
 .footer-dark {
-    flex-direction: column;
-    justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 
