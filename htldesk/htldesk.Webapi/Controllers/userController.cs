@@ -12,7 +12,7 @@ using System.Net;
 using System.Security.Claims;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Mailgun;
+
 
 namespace htldesk.Webapi.Controllers
 {
@@ -60,18 +60,18 @@ namespace htldesk.Webapi.Controllers
             //create verification token
             user.VerificationToken = Guid.NewGuid().ToString();
             //store in memory
-           // _db.Add(user);
-           // await _db.SaveChangesAsync();
+             _db.Add(user);
+             await _db.SaveChangesAsync();
             //send verification email
             // Use the SendGrid library to send the email
-            var apiKey = _config["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"];
-            var client = new SendGridClient(apiKey);
+            string apikey = System.Environment.GetEnvironmentVariable("SENDGRID_API_KEY", EnvironmentVariableTarget.Machine);
+            var client = new SendGridClient(apikey);
 
             var from = new EmailAddress("fis22360@spengergasse.at", "HTL Desk");
             var to = new EmailAddress(userDto.Email);
             var subject = "Verification Email";
-            var plainTextContent = "Please click on the following link to verify your email address: http://localhost:5001/users/verify?token=" + user.VerificationToken;
-            var htmlContent = "<p>Please click on the following link to verify your email address: <a href='http://localhost:5001/users/verify?token=" + user.VerificationToken +  "</a></p>";
+            var plainTextContent = "Please click on the following link to verify your email address: https://localhost:5001/api/users/verify?token=" + user.VerificationToken;
+            var htmlContent = "<p>Please click on the following link to verify your email address: <a href='https://localhost:5001/api/users/verify?token=" + user.VerificationToken + "'>Verify</a></p>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
             var response = await client.SendEmailAsync(msg);
@@ -94,7 +94,7 @@ namespace htldesk.Webapi.Controllers
             user.VerificationToken = null;
             _db.Update(user);
             await _db.SaveChangesAsync();
-            return Redirect("http://localhost:5001/VerificationSuccess");
+            return Redirect("https://localhost:5001/VerificationS");
         }
         
         

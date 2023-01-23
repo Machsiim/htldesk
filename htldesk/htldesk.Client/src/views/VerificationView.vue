@@ -1,10 +1,10 @@
 <template>
   <div class="VerificationSuccess">
     <center>
-      <h1>Verifizierung erfolgreich</h1>
+      <h1>Verifizierung erforderlich</h1>
       <p>
-        Dein Account wurde erfolgreich verifiziert. Du kannst dich nun
-        einloggen.
+        Um Ihren Account zu verifizieren, klicken Sie bitte auf den Link,
+        welchen Sie per Mail erhalten haben.
       </p>
       <br />
       <router-link to="/login">Zum Login</router-link>

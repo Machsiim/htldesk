@@ -48,9 +48,14 @@ const router = createRouter({
       component: () => import("../views/DynFileView.vue"),
     },
     {
-      path: "/VerificationSuccess",
-      name: "VerificationSuccess",
-      component: () => import("../views/VerificationSuccessView.vue"),
+      path: "/VerificationS",
+      name: "VerificationS",
+      component: () => import("../views/VerificationSView.vue"),
+    },
+    {
+      path: "/verification",
+      name: "verification",
+      component: () => import("../views/VerificationView.vue"),
     },
   ],
 });
