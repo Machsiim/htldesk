@@ -68,7 +68,7 @@ import FilePanel from "../components/FilePanel.vue";
                   <RouterLink to="/" class="footer-link">Home</RouterLink>
                 </li>
                 <li>
-                  <RouterLink to="/login" class="footer-link">Login</RouterLink>
+                  <RouterLink to="/dashboard" class="footer-link">Login</RouterLink>
                 </li>
                 <li>
                   <RouterLink to="/register" class="footer-link"
@@ -202,6 +202,7 @@ body {
   flex-wrap: wrap;
 }
 .card {
+  color: darkgreen;
   margin: 10px;
   background-color: #fff;
   border-radius: 10px;
@@ -213,6 +214,7 @@ body {
   background-color: rgba(255, 242, 242, 0.8);
 }
 .card-header img {
+  border-radius: 10px;
   width: 100%;
   height: 200px;
   object-fit: cover;

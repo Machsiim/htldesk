@@ -1,0 +1,1 @@
+import{o as a,c as s,a as t,t as r}from"./index.02eede35.js";const n={data(){return{model:{username:"",password:""}}},computed:{username(){return this.$store.state.user.username}}},m=Object.assign(n,{__name:"ProfileView",setup(o){return(e,u)=>(a(),s("div",null,[t("h1",null,"Willkommen, "+r(e.username),1)]))}});export{m as default};
