@@ -6,31 +6,61 @@ import axios from "axios";
     <div class="accounts">
         <br>
         <br>
-        <div>Konto: {{ this.name }}</div>
-        <br>
-        <div v-for="a in entries" v-bind:key="a.guid">
-            <div>Datum: {{ a.datum }}</div>
-            <div>Gegenkonto: {{ a.gegenKonto }}</div>
-            <div>Soll: {{ a.soll }}</div>
-            <div>Haben: {{ a.haben }}</div>
-            <br>
-        </div>
+        <div>{{ this.name }}</div>
+        <table>
+            <tr>
+                <th>Datum</th>
+                <th>Gegenkonto</th>
+                <th>Soll</th>
+                <th>Haben</th>
+            </tr>
+
+
+            <tr v-for="e in this.entries" v-bind:key=e.guid>
+                <td>{{ e.datum }}</td>
+                <td>{{ e.gegenKonto }}</td>
+                <td>{{ e.soll }}</td>
+                <td>{{ e.haben }}</td>
+                <td></td>
+                <td>
+                    <button v-on:click="deleteEntry(e.guid)">Löschen</button>
+                </td>
+                <br>
+            </tr>
+        </table>
     </div>
 </template>
 
 <script>
 export default {
+
+    props: {
+        guid: String,
+        name: String,
+    },
+
     data() {
         return {
             entries: [],
-            entrieCount: 0,
-            name: "2800",
-            guid: "08daf341-a2c3-4020-8154-4a29c41300b7", // To be changed later on
         };
     },
     mounted: async function () {
-        this.entrieCount = (await axios.get("https://localhost:5001/api/entries/count/" + this.guid)).data;
         this.entries = (await axios.get("https://localhost:5001/api/entries/" + this.guid)).data;
     },
+    methods: {
+        deleteEntry(guid) {
+            axios.delete("https://localhost:5001/api/entries/" + guid)
+                .then(response => {
+                    this.message = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            this.$router.push('/dashboard');
+        },
+        editEntry(guid) {
+            this.$router.push('/change/entry/' + guid);
+        }
+    }
 };
 </script>

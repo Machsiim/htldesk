@@ -9,9 +9,16 @@ import File from '../components/File.vue'
         <br>
         <br>
         <br>
-        <File v-bind:name=$route.params.filename></File>
+        <div class="buttons">
+            <RouterLink to="/create" class="nav-link">Create</RouterLink>
+            <RouterLink to="/change" class="nav-link">Change</RouterLink>
+            <RouterLink to="/delete" class="nav-link">Delete</RouterLink>
+        </div>
         <div v-for="a in accounts" v-bind:key="a.guid">
-            <AccountingAccount v-bind:guid="a.guid"></AccountingAccount> <!--add v-bind:guid="xxx" later-->
+            <AccountingAccount v-bind:guid="a.guid" v-bind:name="a.name"></AccountingAccount>
+            <div>
+                <RouterLink v-bind:to="`/create/${a.guid}`" class="nav-link">Create</RouterLink>
+            </div>
         </div>
 
     </div>
@@ -27,9 +34,21 @@ export default {
     },
     methods: {
         returnFilename() {
-            console.log(this.$route.params.filename);
             return this.$route.params.filename;
-        }
+        },
+
+        async create() {
+            console.log("create");
+        },
+
+        async change() {
+            console.log("change");
+            async
+        },
+
+        async remove() {
+            console.log("remove");
+        },
     },
     mounted: async function () {
         try {
@@ -40,7 +59,6 @@ export default {
 
             res.json().then((data) => {
                 this.accounts = data;
-                console.log(this.accounts);
             })
 
         } catch (e) {
@@ -51,3 +69,9 @@ export default {
     components: { AccountingAccount }
 };
 </script>
+
+<style>
+.buttons {
+    text-align: center;
+}
+</style>

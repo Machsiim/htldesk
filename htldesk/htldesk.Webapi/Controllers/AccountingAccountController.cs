@@ -64,10 +64,10 @@ namespace htldesk.Webapi.Controllers
             return Ok();
         }
 
-        [HttpPut("update")]
-        public IActionResult UpdateAccountingAccount(AccountingAccountDto accountingAccountDto)
+        [HttpPut("{guid:Guid}")]
+        public IActionResult UpdateAccountingAccount(Guid guid, AccountingAccountDto accountingAccountDto)
         {
-            var accountingAccount = _db.AccountingAccounts.FirstOrDefault(a => a.Guid == accountingAccountDto.Guid);
+            var accountingAccount = _db.AccountingAccounts.FirstOrDefault(a => a.Guid == guid);
             if (accountingAccount is null) { return NotFound(); }
             accountingAccount.Name = accountingAccountDto.Name;
             _db.SaveChanges();

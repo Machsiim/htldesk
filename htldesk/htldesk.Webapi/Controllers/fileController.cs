@@ -29,27 +29,10 @@ namespace htldesk.Webapi.Controllers
             var user = _db.Users.FirstOrDefault(u => u.Username == username);
             if (user is null) return BadRequest();
             List<File> files = new();
-            int count = 0;
-            foreach(File file in _db.Files)
+            foreach(File f in _db.Files)
             {
-                if (file.UserGuid == user.Guid)
-                {
-                    files.Add(file);
-                    count++;
-                }
+                if(f.UserGuid == user.Guid) files.Add(f);
             }
-
-            if (count != 3)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    File file = new File("Neue Datei", user.Guid);
-                    _db.Files.Add(file);
-                    _db.SaveChanges();
-                    files.Add(file);
-                }
-            }
-            
             return Ok(files);
         }
 
@@ -61,7 +44,7 @@ namespace htldesk.Webapi.Controllers
             return Ok(file);
         }
 
-        [HttpPost("upload")]
+        [HttpPost("create")]
         public IActionResult UploadFile(FileDto fileDto)
         {
             var user = _db.Users.FirstOrDefault(u => u.Guid == fileDto.UserGuid);
