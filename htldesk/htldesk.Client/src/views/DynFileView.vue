@@ -21,7 +21,7 @@ import File from '../components/File.vue'
             </div>
         </div>
 
-        <div class="footer-dark">
+    <div class="footer-dark">
     <footer class="text-center text-white" id="dashaev">
       <br>
       <div class="container">
@@ -70,8 +70,6 @@ import File from '../components/File.vue'
         </div>
     </footer>
   </div>
-
-    </div>
 </template>
 
 <script>
@@ -85,7 +83,6 @@ export default {
     methods: {
         returnFilename() {
             return this.$route.params.filename;
-        }
         },
 
         async create() {
@@ -122,9 +119,6 @@ export default {
 </script>
 
 <style>
-.buttons {
-    text-align: center;
-}
 #dashaev {
   position: fixed;
   bottom: 0;
