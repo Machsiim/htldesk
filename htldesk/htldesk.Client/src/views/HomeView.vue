@@ -111,7 +111,7 @@ import FilePanel from "../components/FilePanel.vue";
 <style>
 
 footer {
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: black;
