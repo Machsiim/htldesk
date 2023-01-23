@@ -5,7 +5,7 @@ import File from './File.vue';
 <template>
     <div class="files">
         <div v-for="f in fileNames" v-bind:key="f.guid">
-            <RouterLink v-on:click="this.$store.commit('changeFile', f.guid)" v-bind:to="`/files/${Username}/${f.name}`">{{ f.name }}</RouterLink>
+            <RouterLink v-on:click="this.$store.commit('changeFile', f.guid, f.name)" v-bind:to="`/files/${Username}/${f.name}`">{{ f.name }}</RouterLink>
         </div>
     </div>
 </template>

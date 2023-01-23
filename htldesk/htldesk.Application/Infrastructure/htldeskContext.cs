@@ -130,7 +130,7 @@ public class HtldeskContext : DbContext
         {
             return new Entry(
                 accountingAccountGuid: f.Random.Guid(),
-                gegenKonto: f.Random.Guid(),
+                gegenKonto: f.Random.Int(0, 1000),
                 haben: f.Random.Int(0, 1000),
                 soll: f.Random.Int(0, 1000),
                 datum: f.Date.Past())
@@ -141,23 +141,23 @@ public class HtldeskContext : DbContext
 
         // Lenz Entries
         List<Entry> LenzEntries = new List<Entry>();
-        Entry entry1 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 100, 0, DateTime.Now);
-        Entry entry2 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 0, 100, DateTime.Now);
-        Entry entry3 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 100, 0, DateTime.Now);
+        Entry entry1 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 2800, 100, 0, DateTime.Now);
+        Entry entry2 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 1234, 0, 100, DateTime.Now);
+        Entry entry3 = new Entry(Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 4312, 100, 0, DateTime.Now);
         LenzEntries.Add(entry1);
         LenzEntries.Add(entry2);
         LenzEntries.Add(entry3);
 
-        Entry entry4 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 100, 0, DateTime.Now);
-        Entry entry5 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 0, 100, DateTime.Now);
-        Entry entry6 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 100, 0, DateTime.Now);
+        Entry entry4 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 2344, 100, 0, DateTime.Now);
+        Entry entry5 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 0887, 0, 100, DateTime.Now);
+        Entry entry6 = new Entry(Guid.Parse("08daf341-a2c3-4090-87f9-0524632421cb"), 2344, 100, 0, DateTime.Now);
         LenzEntries.Add(entry4);
         LenzEntries.Add(entry5);
         LenzEntries.Add(entry6);
 
-        Entry entry7 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 100, 0, DateTime.Now);
-        Entry entry8 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 0, 100, DateTime.Now);
-        Entry entry9 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), Guid.Parse("08daf341-a2c3-4020-8154-4a29c41300b7"), 100, 0, DateTime.Now);
+        Entry entry7 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 1523, 100, 0, DateTime.Now);
+        Entry entry8 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 8765, 0, 100, DateTime.Now);
+        Entry entry9 = new Entry(Guid.Parse("08daf341-a2c3-409a-8858-1f14cc6ed832"), 2346, 100, 0, DateTime.Now);
         LenzEntries.Add(entry7);
         LenzEntries.Add(entry8);
         LenzEntries.Add(entry9);

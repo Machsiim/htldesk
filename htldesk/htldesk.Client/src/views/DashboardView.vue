@@ -9,6 +9,7 @@ import FilePanel from '../components/FilePanel.vue';
         <div class="welcome">Willkommen, {{ username }}</div>
         <div class="filesText">Welches File wollen Sie heute bearbeiten?</div>
      	<FilePanel></FilePanel>
+        <RouterLink to="/create/file" class="nav-link">File erstellen</RouterLink>
   </div>
 </template>
 
