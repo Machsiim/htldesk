@@ -1,45 +1,64 @@
-WICHTIG!!!
+# Projekt HtlDesk
 
-Unser Testcase ist Lenz.
-Alle AccountingAccounts und Entries sind gehardcodet für Lenz. Eigene Accounts werden noch nicht funktionieren.
+Klone das Repository mit folgendem Befehl:
 
-Folgendes wird zum Testen zu verwenden:
+```
+git clone https://github.com/Machsiim/htldesk
+```
 
-User: Lenz, 1111
+## Kurzbeschreibung
 
-File Guid: 08daf345-92a9-4ab8-83e6-db48f1a98c9f (Nur dieses File ist befüllt)
+Die Web-Applikation HtlDesk soll Schülern dabei helfen, Buchungen im Fach Rechnungswesen einfacher und vorallem schneller zu machen. 
+Jeder der sich registriert, kann Files erstellen, in denen er Buchhaltungskonten (Excel ähnlich) erstellen, bearbeiten und löschen kann. HtlDesk ist jedoch kein reiner Excel Ersatz, sondern bietet Quality-Of-Life Features wie Text-Highlighting und eine übersichtliche Tabellen-Führung. 
 
-AccountingAccounts: 08daf341-a2c3-4020-8154-4a29c41300b7 , 08daf341-a2c3-4020-8154-4a29c41300b8 , 08daf341-a2c3-4020-8154-4a29c41300b9
+## Teammitglieder
 
-Entries haben immer verschiedene Guids, sollte aber irrelevant sein.
+| Name                    | Email                  | Aufgabenbereich                           |
+| ----------------------- | -------------------------| ----------------------------------------|
+| Mohamad Aldulemi, 3CHIF | alu22162@spengergasse.at | Frontend Design, Content                |
+| Amin Dashaev,     3CHIF | das22180@spengergasse.at | Code Optimierung, Debugging             |
+| Eric Fischer,     3CHIF | fis22360@spengergasse.at | Design, Login/Register Pages            |
+| Dominik Kusion,   3CHIF | kus22544@spengergasse.at | Authentication, Backend                 |
+| Maxim Romanenko,  3CHIF | rom22634@spengergasse.at | C# Backend                              |
 
+## Voraussetzungen
 
+Das Projekt verwendet .NET in der Version >= 6. Prüfe mit folgendem Befehl, ob die .NET SDK in der
+Version 6 oder 7 am Rechner installiert ist:
 
-"# htldesk"
+```
+dotnet --version
+```
 
-1) Wie starte ich das Projekt?
-Folgende Software wird benötigt: Docker, DBeaver.
+Die .NET 6 SDK (LTS Version) kann von https://dotnet.microsoft.com/en-us/download/dotnet/6.0 für alle
+Plattformen geladen werden.
 
-Optional: 13 Gehirnzellen
+Zum Prüfen der Docker Installation kann der folgende Befehl verwendet werden. Er muss die Version
+zurückgeben:
 
-Schritt 1: Das Programm Docker starten.
+```
+docker --version
+```
 
-Schritt 2: startServer.bat im ersten Unterordner ausführen.
+Im Startskript wird der Container geladen, bevor der Server gestartet wird.
 
-Schritt 3: Wenn das deine erste Ausführung des Projekts ist, musst du erstmal eine neue Database in DBeaver hinzufügen. Dazu DBeaver starten und unter Database/New Database Connection die Datenbank eingeben. MariaDB --Next--> Port: 13306, Database leer lassen, Username: root, Password: mariadb_root_password, --Finish-->
+## Starten des Programmes
 
-Frontend Extra Schritt: Wenn du deine Änderungen auf den Server draufspielen willst und nicht nur in Dev arbeiten willst, musst du nach jeder Veränderung "npm run build" ausführen. Dabei nicht vergessen im htldesk/htldesk/htldesk.Client Verzeichnis sein. (Den Server muss man nicht neustarten, da dieser die Änderungen normalerweise live übernehmen sollte.
+Führe nach dem Klonen im Terminal den folgenden Befehl aus, um den Server zu starten.
 
-Sonst Right Click auf localhost:13306 und Refresh.
+**Windows**
 
-2) Ich will am Projekt arbeiten. Was soll ich machen?
-Oben links im Browser findest du Issues. Dort siehst du grundsätzlich an was gerade gearbeitet wird. Wenn nichts offen ist, einfach nachfragen.
+```
+startServer.cmd
+```
 
-Wenn du nun weißt, an was du arbeiten willst, musst du erstmal in den richtigen Branch kommen. Wenn es ein Issue gibt, einfach den Branch vom Issue verwenden und wenn nicht, einen erstellen. Zunächst das Repo reseten und syncen (resetGit und syncGit). Jetzt kannst du am Projekt was lokal verändern und auf einen Branch commiten.
+**macOS, Linux**
 
-3) Ich hab jetzt was geändert, aber wenn ich den Server starte, ändert sich nichts. Was ist los?
-Wenn du in Visual Studio was am Backend geändert hast, darfst du nicht vergessen, alle Datein mit STRG + S zu speichern. Im Gegensatz zur Build Aktion in Visual Studio, werden die Datein nicht gespeichert.
+```
+./startServer.sh
+```
 
-Wenn du jedoch am Frontend was geändert hast, musst du vor jeder Ausführung einen extra Schritt erledigen. In Visual Studio oder in CMD musst du dich ins Verzeichnis "C:\HTL Desk Projekt\htldesk\htldesk\htldesk.Client" navigieren und dort "npm run build" ausführen. Jetzt sollte alles funktionieren.
+Nach dem Starten des Servers kann im Browser die Seite **http://localhost:5000**
+aufgerufen werden. Falls die Meldung erscheint, dass das Zertifikat nicht geprüft werden kann,
+muss mit *Fortsetzen* bestätigt werden.
 
-PS: Stand 26.12.2022 02:58: Könnte sich jederzeit ändern. Bei Fragen, Maxim fragen.

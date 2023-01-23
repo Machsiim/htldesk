@@ -1,57 +1,113 @@
 <template>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
+  <div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
 
-  <div class="register">
-    <h1 id="reg_form">Registration Form</h1>
-    <form v-on:submit.prevent="register">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" />
-      <br />
+    <div class="register">
+      <h1 id="reg_form">Registration Form</h1>
+      <form v-on:submit.prevent="register">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <br />
 
-      <small class="error"></small>
-      <hr />
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" />
-      <br />
+        <small class="error"></small>
+        <hr />
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" />
+        <br />
 
-      <small class="error"></small>
-      <hr />
-      <label for="password">Password:</label>
-      <div id="password-container">
-        <input type="password" id="password" ref="password" name="password" />
+        <small class="error"></small>
+        <hr />
+        <label for="password">Password:</label>
+        <div id="password-container">
+          <input type="password" id="password" ref="password" name="password" />
+          <i
+            class="fa fa-eye eye-icon"
+            id="eye_icon"
+            ref="eye_icon"
+            v-on:click="
+              togglePasswordVisibility(this.$refs.password, this.$refs.eye_icon)
+            "
+          ></i>
+        </div>
+        <br />
+
+        <small class="error"></small>
+        <hr />
+        <label for="password2">Confirm Password:</label>
+        <input
+          type="password"
+          id="password2"
+          ref="password2"
+          name="password2"
+        />
         <i
           class="fa fa-eye eye-icon"
-          id="eye_icon"
-          ref="eye_icon"
+          id="eye_icon2"
+          ref="eye_icon2"
           v-on:click="
-            togglePasswordVisibility(this.$refs.password, this.$refs.eye_icon)
+            togglePasswordVisibility(this.$refs.password2, this.$refs.eye_icon2)
           "
         ></i>
-      </div>
-      <br />
+        <br />
+        <small class="error"></small>
+        <hr />
+        <input type="submit" value="Submit" v-on:click="register" />
 
-      <small class="error"></small>
-      <hr />
-      <label for="password2">Confirm Password:</label>
-      <input type="password" id="password2" ref="password2" name="password2" />
-      <i
-        class="fa fa-eye eye-icon"
-        id="eye_icon2"
-        ref="eye_icon2"
-        v-on:click="
-          togglePasswordVisibility(this.$refs.password2, this.$refs.eye_icon2)
-        "
-      ></i>
-      <br />
-      <small class="error"></small>
-      <hr />
-      <input type="submit" value="Submit" v-on:click="register" />
-
-      <p id="success"></p>
-    </form>
+        <p id="success"></p>
+      </form>
+    </div>
+    <div class="footer-dark">
+      <footer class="text-center text-white">
+        <br />
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-md-3 item">
+              <h3>Seiten</h3>
+              <ul>
+                <li>
+                  <RouterLink to="/" class="footer-link">Home</RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/login" class="footer-link">Login</RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/register" class="footer-link"
+                    >Register</RouterLink
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6 col-md-3 item">
+              <h3>About</h3>
+              <ul>
+                <li>
+                  <RouterLink to="/about" class="footer-link">Firma</RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/about" class="footer-link">Team</RouterLink>
+                </li>
+                <li>
+                  <RouterLink to="/about" class="footer-link"
+                    >Karriere</RouterLink
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6 item text">
+              <h3>InParis</h3>
+              <p>
+                Die Webapllikation bietet Hilfe an für Schüler oder auch Lehrer.
+                Arbeiten Sie ganz leicht mit unsere Tools
+              </p>
+            </div>
+          </div>
+          <p class="copyright">InParis © 2023</p>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -207,6 +263,81 @@ export default {
 </script>
 
 <style>
+
+
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+}
+
+
+.footer-dark {
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+
+.footer-dark h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.footer-dark ul {
+  padding: 0;
+  list-style: none;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.footer-link:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+.footer-dark ul a:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .footer-dark .item:not(.social) {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom: 36px;
+}
+
+@media (max-width: 767px) {
+  .footer-dark .item.text {
+    margin-bottom: 0;
+  }
+}
+
+.footer-dark .item.text p {
+  opacity: 0.6;
+  margin-bottom: 0;
+}
+
+.footer-dark .copyright {
+  text-align: center;
+  padding-top: 24px;
+  opacity: 0.3;
+  font-size: 13px;
+  margin-bottom: 0;
+}
 .error {
   color: red !important;
 }
