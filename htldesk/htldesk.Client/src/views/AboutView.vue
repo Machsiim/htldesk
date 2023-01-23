@@ -20,9 +20,9 @@
       </body>
     </main>
     <div class="footer-dark">
-      <footer class="text-center text-white">
-        <br />
-        <div class="container">
+      <footer class="text-center text-white" id="foot_about">
+      <br>
+      <div class="container">
           <div class="row">
             <div class="col-sm-6 col-md-3 item">
               <h3>Seiten</h3>
@@ -72,7 +72,9 @@
 </template>
 
 <style scoped>
-footer {
+
+
+#foot_about {
   position: fixed;
   bottom: 0;
   width: 100%;

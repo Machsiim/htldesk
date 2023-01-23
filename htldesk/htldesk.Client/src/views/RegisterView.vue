@@ -60,7 +60,7 @@
       </form>
     </div>
     <div class="footer-dark">
-      <footer class="text-center text-white">
+      <footer class="text-center text-white" id="foot_register">
         <br />
         <div class="container">
           <div class="row">
@@ -265,7 +265,7 @@ export default {
 <style>
 
 
-footer {
+#foot_register {
   position: relative;
   bottom: 0;
   width: 100%;

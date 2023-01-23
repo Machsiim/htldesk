@@ -124,11 +124,9 @@ h1 {
 }
 
 
-#maxim{
-  position: absolute !important;
-}
-footer {
+#maxim {
   bottom: 0;
+  position: absolute !important;
   width: 100%;
   background-color: black;
 }
