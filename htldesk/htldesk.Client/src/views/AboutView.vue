@@ -1,17 +1,28 @@
 <template>
   <div class="about">
-    <h1 class="">InParis</h1>
     <main>
-      <p>
-        Die Webapplikation hilft Schülern leichter zu arbeiten und einen
-        Übersicht zu haben. Die Applikation wurde von 5 Schülern <br> der Schule Htl
-        Spengergasse in Wien 1050 Österreich.
-      </p>
+      <title class="">InParis</title>
+
+      <body>
+        <h1>Über uns</h1>
+        <p>
+          Eine Webapplikation entwickelt für Schülern. Die Webapplikation wurde
+          von der htl Spengergasse entwickelt.
+        </p>
+        <h2>Our Team</h2>
+        <p>Unser team besteht aus 5 Schülern</p>
+        <h2>Contact Us</h2>
+        <p>
+          Falls Sie irgendwelche Fragen haben können Sie gerne unter dieser Mail
+          kontaktieren htldesk@spengergasse.at oder unter der Nummer 0043
+          12345678
+        </p>
+      </body>
     </main>
     <div class="footer-dark">
-    <footer class="text-center text-white">
-      <br>
-      <div class="container">
+      <footer class="text-center text-white">
+        <br />
+        <div class="container">
           <div class="row">
             <div class="col-sm-6 col-md-3 item">
               <h3>Seiten</h3>
@@ -55,8 +66,8 @@
           </div>
           <p class="copyright">InParis © 2023</p>
         </div>
-    </footer>
-  </div>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -68,12 +79,10 @@ footer {
   background-color: black;
 }
 
-
 .footer-dark {
-    flex-direction: column;
-    justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
 }
-
 
 .footer-dark h3 {
   margin-top: 0;
@@ -138,6 +147,4 @@ footer {
 h3 {
   margin: 0;
 }
-
-
 </style>
