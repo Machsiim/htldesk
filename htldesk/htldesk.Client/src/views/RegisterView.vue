@@ -226,8 +226,4 @@ i.fa-eye {
   cursor: pointer;
   margin-left: -30px;
 }
-#register_button {
-  display: none;
-  visibility: hidden;
-}
 </style>

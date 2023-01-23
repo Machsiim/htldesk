@@ -25,6 +25,7 @@ namespace htldesk.Application.Model
             Username = name;
             Email = email;
             SetPassword(password);
+            
         }
 
         [Key]
@@ -33,6 +34,10 @@ namespace htldesk.Application.Model
         public Guid Guid { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+
+        public string? VerificationToken { get; set; } = null;
+
+        public bool IsVerified { get; set; } = false;
 
 
 

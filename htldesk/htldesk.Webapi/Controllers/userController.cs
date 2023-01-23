@@ -7,7 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Mailgun;
 
 namespace htldesk.Webapi.Controllers
 {
@@ -46,19 +51,53 @@ namespace htldesk.Webapi.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult RegisterUser(UserDto userDto)
+        public async Task<IActionResult> RegisterUser(UserDto userDto)
         {
-            Console.WriteLine("register drinnen");
             var user = new User(userDto.Username, userDto.Email, userDto.Password);
+            user.IsVerified = false;
             var user2 = _db.Users.FirstOrDefault(u => u.Username == user.Username);
             if (user2 is not null) return BadRequest();
-            _db.Users.Add(user);
-            try { _db.SaveChanges(); }
-            catch (DbUpdateException) { return BadRequest(); } // DB constraint violations, ...
+            //create verification token
+            user.VerificationToken = Guid.NewGuid().ToString();
+            //store in memory
+           // _db.Add(user);
+           // await _db.SaveChangesAsync();
+            //send verification email
+            // Use the SendGrid library to send the email
+            var apiKey = _config["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"];
+            var client = new SendGridClient(apiKey);
+
+            var from = new EmailAddress("fis22360@spengergasse.at", "HTL Desk");
+            var to = new EmailAddress(userDto.Email);
+            var subject = "Verification Email";
+            var plainTextContent = "Please click on the following link to verify your email address: http://localhost:5001/users/verify?token=" + user.VerificationToken;
+            var htmlContent = "<p>Please click on the following link to verify your email address: <a href='http://localhost:5001/users/verify?token=" + user.VerificationToken +  "</a></p>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+
+            var response = await client.SendEmailAsync(msg);
+
+            if (response.StatusCode != HttpStatusCode.Accepted)
+            {
+                // An error occurred
+                throw new Exception("Failed to send verification email");
+            }
             user.Id = 0;
             return Ok(user);
         }
 
+        [HttpGet("verify")]
+        public async Task<IActionResult> VerifyEmail(string token)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.VerificationToken == token);
+            if (user is null) return BadRequest();
+            user.IsVerified = true;
+            user.VerificationToken = null;
+            _db.Update(user);
+            await _db.SaveChangesAsync();
+            return Redirect("http://localhost:5001/VerificationSuccess");
+        }
+        
+        
         [HttpPost("login")]
         public IActionResult Login([FromBody] CredentialsDto credentials)
         {
