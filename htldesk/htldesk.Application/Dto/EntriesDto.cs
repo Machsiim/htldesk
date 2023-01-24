@@ -9,7 +9,7 @@ namespace htldesk.Application.Dto
     public record EntriesDto(
         Guid Guid,
         Guid AccountingAccountGuid,
-        Guid GegenKonto,
+        int GegenKonto,
         decimal Haben,
         decimal Soll,
         DateTime Datum)

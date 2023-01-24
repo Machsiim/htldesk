@@ -57,6 +57,36 @@ const router = createRouter({
       name: "verification",
       component: () => import("../views/VerificationView.vue"),
     },
+     {
+      path: '/create',
+      name: 'create',
+      component: () => import('../views/CreateView.vue')
+    },
+    {
+      path: '/delete',
+      name: 'delete',
+      component: () => import('../views/DeleteView.vue')
+    },
+    {
+      path: '/change',
+      name: 'change',
+      component: () => import('../views/ChangeView.vue')
+    },
+    {
+      path: '/create/:accountGuid',
+      name: 'createentrie',
+      component: () => import('../views/CreateEntryView.vue')
+    },
+    {
+      path: '/delete/:accountGuid',
+      name: 'deleteentrie',
+      component: () => import('../views/DeleteEntryView.vue')
+    },
+    {
+      path: '/create/file',
+      name: 'createfile',
+      component: () => import('../views/CreateFileView.vue')
+    },
   ],
 });
 

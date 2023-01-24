@@ -16,7 +16,7 @@ namespace htldesk.Application
         protected Entry() {}
         #pragma warning restore CS8618
         
-        public Entry(Guid accountingAccountGuid, Guid gegenKonto, decimal haben, decimal soll, DateTime datum)
+        public Entry(Guid accountingAccountGuid, int gegenKonto, decimal haben, decimal soll, DateTime datum)
         {
             this.AccountingAccountGuid = accountingAccountGuid;
             this.GegenKonto = gegenKonto; 
@@ -30,7 +30,7 @@ namespace htldesk.Application
         public int Id { get; private set; }
         public Guid Guid { get; set; }
         public Guid AccountingAccountGuid { get; set; }
-        public Guid GegenKonto { get; set; }
+        public int GegenKonto { get; set; }
         public decimal Haben { get; set; }
         public decimal Soll { get; set; }
         public DateTime Datum { get; set; }

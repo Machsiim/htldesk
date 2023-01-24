@@ -14,7 +14,6 @@
                     <RouterLink to="/about" class="nav-link">About</RouterLink>
                   </div>
                 </li>
-
                 <li>
                   <RouterLink to="/login" class="nav-link">Login</RouterLink>
                 </li>
@@ -50,54 +49,6 @@
     </header>
 
     <RouterView />
-    <div class="footer-dark">
-      <footer class="fixed-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-md-3 item">
-              <h3>Seiten</h3>
-              <ul>
-                <li>
-                  <RouterLink to="/" class="footer-link">Home</RouterLink>
-                </li>
-                <li>
-                  <RouterLink to="/login" class="footer-link">Login</RouterLink>
-                </li>
-                <li>
-                  <RouterLink to="/register" class="footer-link"
-                    >Register</RouterLink
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="col-sm-6 col-md-3 item">
-              <h3>About</h3>
-              <ul>
-                <li>
-                  <RouterLink to="/about" class="footer-link">Firma</RouterLink>
-                </li>
-                <li>
-                  <RouterLink to="/about" class="footer-link">Team</RouterLink>
-                </li>
-                <li>
-                  <RouterLink to="/about" class="footer-link"
-                    >Karriere</RouterLink
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-6 item text">
-              <h3>InParis</h3>
-              <p>
-                Die Webapllikation bietet Hilfe an für Schüler oder auch Lehrer.
-                Arbeiten Sie ganz leicht mit unsere Tools
-              </p>
-            </div>
-          </div>
-          <p class="copyright">InParis © 2023</p>
-        </div>
-      </footer>
-    </div>
   </div>
 </template>
 
@@ -220,26 +171,6 @@ footer {
   margin-bottom: 36px;
 }
 
-@media (max-width: 767px) {
-  .footer-dark .item.text {
-    margin-bottom: 0;
-  }
-}
-
-.footer-dark .item.text p {
-  opacity: 0.6;
-  margin-bottom: 0;
-}
-
-.footer-dark .copyright {
-  text-align: center;
-  padding-top: 24px;
-  opacity: 0.3;
-  font-size: 13px;
-  margin-bottom: 0;
-}
-
-/* Add this style to the parent element */
 #appContainer {
   position: relative;
 }
@@ -252,7 +183,6 @@ body {
   background-color: #1f6032 !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white !important;
-  position: relative;
 }
 
 #appContainer {

@@ -10,6 +10,7 @@ export default createStore({
             },
             file: {
                 guid: "",
+                path: "",
             }
         }
     },
@@ -23,8 +24,9 @@ export default createStore({
             state.user.guid = userdata.userGuid;
             state.user.isLoggedIn = true;
         },
-        changeFile(state, file) {
+        changeFile(state, file, path) {
             state.file.guid = file;
-        }
+            state.file.path = path;
+        },
     }
 });
