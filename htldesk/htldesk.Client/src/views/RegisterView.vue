@@ -6,7 +6,7 @@
     />
 
     <div class="register">
-      <h1 id="reg_form">Registration Form</h1>
+      <center><h1 id="reg_form">Registration Form</h1></center>
       <form v-on:submit.prevent="register">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" />
@@ -263,8 +263,6 @@ export default {
 </script>
 
 <style>
-
-
 #foot_register {
   position: relative;
   bottom: 0;
@@ -272,12 +270,10 @@ export default {
   background-color: black;
 }
 
-
 .footer-dark {
-    flex-direction: column;
-    justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
 }
-
 
 .footer-dark h3 {
   margin-top: 0;

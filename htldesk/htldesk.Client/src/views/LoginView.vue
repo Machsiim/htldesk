@@ -12,21 +12,23 @@ import axios from "axios";
         <label>Password:</label>
         <input type="password" id="password" v-model="model.password" />
         <hr />
-        <button type="button" v-on:click="sendLoginData">Submit</button>
+        <button type="button" id="submitbtn" v-on:click="sendLoginData">
+          Submit
+        </button>
         (Hint: Use lenz, Password 1111)
       </template>
       <template v-else>
         <div class="container-fluid">
-        <h1>Willkommen, {{ username }}</h1>
-        Angemeldet als {{ username }}
-        <a href="javascript:void(0)" v-on:click="deleteToken()">Abmelden</a>
-      </div>
+          <h1>Willkommen, {{ username }}</h1>
+          Angemeldet als {{ username }}
+          <a href="javascript:void(0)" v-on:click="deleteToken()">Abmelden</a>
+        </div>
       </template>
     </form>
     <div class="footer-dark">
-    <footer class="text-center text-white" id="maxim">
-      <br>
-      <div class="container">
+      <footer class="text-center text-white" id="maxim">
+        <br />
+        <div class="container">
           <div class="row">
             <div class="col-sm-6 col-md-3 item">
               <h3>Seiten</h3>
@@ -70,8 +72,8 @@ import axios from "axios";
           </div>
           <p class="copyright">InParis © 2023</p>
         </div>
-    </footer>
-  </div>
+      </footer>
+    </div>
   </div>
 </template>
 <script>
@@ -90,7 +92,7 @@ export default {
       this.$store.commit("authenticate", null);
     },
     async sendLoginData() {
-      console.log("Sending login data")
+      console.log("Sending login data");
       try {
         const userdata = (await axios.post("users/login", this.model)).data;
         axios.defaults.headers.common[
@@ -118,11 +120,9 @@ export default {
 </script>
 
 <style>
-
 h1 {
   text-align: left !important;
 }
-
 
 #maxim {
   bottom: 0;
@@ -131,12 +131,10 @@ h1 {
   background-color: black;
 }
 
-
 .footer-dark {
-    flex-direction: column;
-    justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
 }
-
 
 .footer-dark h3 {
   margin-top: 0;
@@ -197,6 +195,4 @@ h1 {
   font-size: 13px;
   margin-bottom: 0;
 }
-
-
 </style>
