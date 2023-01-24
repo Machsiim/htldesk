@@ -3,26 +3,47 @@
     <header>
       <div class="wrapper">
         <br />
-
-        <nav class="d-flex">
-          <div>
-            <RouterLink to="/" class="nav-link">Home</RouterLink>
+        <nav>
+          <div class="lll">
+            <div class="navl" id="navl">
+              <ul class="nav__links">
+                <i class="fa fa-times" id="close" v-on:click="closeMenue()"></i>
+                <li><RouterLink to="/" class="nav-link">Home</RouterLink></li>
+                <li>
+                  <div>
+                    <RouterLink to="/about" class="nav-link">About</RouterLink>
+                  </div>
+                </li>
+                <li>
+                  <RouterLink to="/login" class="nav-link">Login</RouterLink>
+                </li>
+                <li>
+                  <div v-if="authenticated">
+                    <RouterLink to="/login" class="nav-link">Profil</RouterLink>
+                  </div>
+                </li>
+                <li>
+                  <div v-if="!authenticated">
+                    <RouterLink to="/register" class="nav-link"
+                      ><Button id="register_button"
+                        >Register</Button
+                      ></RouterLink
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div v-if="authenticated">
+                    <RouterLink to="/dashboard" class="nav-link"
+                      >Dashboard</RouterLink
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <RouterLink to="/about" class="nav-link">About</RouterLink>
-          </div>
-          <div v-if="!authenticated">
-            <RouterLink to="/login" class="nav-link">Login</RouterLink>
-          </div>
-          <div v-if="!authenticated">
-            <RouterLink to="/register" class="nav-link"
-              ><Button id="register_button">Register</Button></RouterLink
-            >
-          </div>
-          <div v-if="authenticated">
-            <RouterLink to="/dashboard" class="nav-link">Dashboard</RouterLink>
-          </div>
+          <i class="fa fa-bars" id="open" v-on:click="openMenue()"></i>
         </nav>
+
         <br />
       </div>
     </header>
@@ -38,10 +59,117 @@ export default {
       return this.$store.state.user.isLoggedIn;
     },
   },
+  methods: {
+    openMenue() {
+      document.getElementById("navl").style.right = "0";
+    },
+    closeMenue() {
+      document.getElementById("navl").style.right = "-200px";
+    },
+  },
 };
 </script>
 
 <style>
+nav {
+  align-items: center !important	;
+}
+.navl {
+  list-style: none !important;
+}
+.navl li {
+  display: inline-block;
+  margin: 0 20px;
+}
+.navl ul li a:hover {
+  color: #0088a9 !important;
+}
+.navl ul li a {
+  transition: all 0.3s ease 0s;
+}
+nav .fa {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav__links li {
+    display: block !important;
+    margin: 50px 0 !important;
+    line-height: 30px !important;
+  }
+  .navl {
+    position: fixed !important;
+    background: midnightblue !important;
+    height: 100% !important;
+    width: 200px !important;
+    top: 0 !important;
+    right: -200px;
+    text-align: center !important;
+    z-index: 92343918 !important;
+    transition: 1s;
+    overflow-y: hidden !important;
+  }
+  #close,
+  #open {
+    display: block !important;
+    color: #fff !important;
+    margin: 10px;
+    font-size: 36px !important;
+    cursor: pointer;
+    size: 130% !important;
+  }
+}
+
+footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-dark h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.footer-dark ul {
+  padding: 0;
+  list-style: none;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.footer-link:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+.footer-dark ul a:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .footer-dark .item:not(.social) {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom: 36px;
+}
 
 #appContainer {
   position: relative;
@@ -75,16 +203,11 @@ body {
   flex-grow: 1;
 }
 
-nav {
-  color: red;
-}
-
-nav h1 {
-  margin: 0;
-}
-
-nav a {
-  text-decoration: none;
+header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 30px 10% !important;
 }
 
 body {

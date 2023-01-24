@@ -17,7 +17,9 @@ namespace htldesk.Application.Dto
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Die Länge der Email ist ungültig."), DataType(DataType.EmailAddress)]
         string Email, 
         
-        string Password)
+        string Password
+        
+        )
     {
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

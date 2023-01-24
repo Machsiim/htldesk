@@ -189,7 +189,7 @@ export default {
           })
         ).data;
         console.log(userdata);
-        this.$router.push("/login");
+        this.$router.push("/verification");
       } catch (error) {
         console.error(error);
         // Display an error message to the user
